@@ -29,10 +29,6 @@ export interface RequestOptions {
   // 成功响应时弹窗的弹窗类型
   responseTipsMode?: ErrorMessageMode;
   responseModalEvent?: () => void;
-  // 响应类型为 blob 时是否下载
-  responseBlobDown?: boolean;
-  // 响应类型为 blob 时是否打开新窗口显示
-  responseBlobView?: boolean;
   responseBlob?: false;
 }
 

@@ -73,97 +73,65 @@ const transform: AxiosTransform = {
   },
 
   /**
-   * @description: 请求成功处理。如果数据不是预期格式，可直接抛出错误
+   * @description: 响应拦截器处理
    */
-  transformRequestHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    console.group('transformRequestHook: 33333333333333333');
-    console.log(res);
-    console.log(options);
-    console.groupEnd();
-
+  // @ts-ignore
+  responseInterceptors: (res: any) => {
+    console.group('responseInterceptors: 333333333333333333333');
+    console.log('res', res);
+    const { requestOptions } = res.config;
     const {
       isTransformResponse,
       isReturnNativeResponse,
       isResponseTips,
       responseTipsMode,
       responseBlob,
-      responseModalEvent,
-    } = options;
-
-    if (responseBlob) {
-      return res;
-    }
-
-    // 是否返回原生响应头 比如：需要获取响应头时使用该属性
-    if (isReturnNativeResponse) {
-      return res;
-    }
-    // 不进行任何处理，直接返回
-    // 用于页面代码可能需要直接获取code，data，message这些信息时开启
-    if (!isTransformResponse) {
-      return res.data;
-    }
-
-    // 是否需要在响应成功后弹窗提示
-    if (isResponseTips && res.data.code === ResultEnum.SUCCESS) {
-      if (responseTipsMode === 'modal') {
-        res.data.message && errorModal({
-          content: res.data.message,
-          btns: [{
-            text: '取消',
-            onclick:(cancel: any)=>{
-              cancel();
-              responseModalEvent && responseModalEvent();
-            }
-          }]
-        })
-      } else if (responseTipsMode === 'message') {
-        res.data.message &&
-        message.success(res.data.message);
-      }
-    }
-
-    // 错误的时候返回
-    const { data } = res;
-    if (!data) {
-      // return '[HTTP] Request has no return value';
-      throw new Error(httpERRMsg.apiRequestFailed);
-    }
-    //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code } = data;
-
-    // 这里逻辑可以根据项目进行修改
-    const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
-    if (hasSuccess) {
-      return data.data;
-    }
-  },
-
-  /**
-   * @description: 响应拦截器处理
-   */
-  // @ts-ignore
-  responseInterceptors: (res: any) => {
-    console.group('responseInterceptors: 44444444444444444444');
-    console.log('res', res);
-    const { requestOptions } = res.config;
-    const { responseBlob } = requestOptions;
+      responseModalEvent
+    } = requestOptions;
     if (responseBlob) {
       return Promise.resolve(res);
     }
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, message } = res.data;
-    console.log(code, message);
+    const { code, message, data } = res.data;
     // 这里逻辑可以根据项目进行修改
     const hasSuccess = code === ResultEnum.SUCCESS;
-    console.log(hasSuccess);
     console.groupEnd();
+    // 1. 请求成功时
     if (hasSuccess) {
-      return Promise.resolve(res);
+      // 1.1 是否需要在响应成功后弹窗提示
+      if (isResponseTips && res.data.code === ResultEnum.SUCCESS) {
+        if (responseTipsMode === 'modal') {
+          res.data.message && errorModal({
+            content: res.data.message,
+            btns: [{
+              text: '取消',
+              onclick:(cancel: any)=>{
+                cancel();
+                responseModalEvent && responseModalEvent();
+              }
+            }]
+          })
+        } else if (responseTipsMode === 'message') {
+          res.data.message &&
+          message.success(res.data.message);
+        }
+      }
+      // 1.2 是否返回原生响应头 比如：需要获取响应头时使用该属性
+      if (isReturnNativeResponse) {
+        return Promise.resolve(res);
+      }
+
+      // 1.3 用于页面代码可能需要直接获取code，data，message这些信息时开启
+      if (!isTransformResponse) {
+        return Promise.resolve(res.data);
+      }
+      // 1.4 不进行任何处理，直接返回 data
+      return Promise.resolve(data);
     } else {
       // 在此处根据自己项目的实际情况对不同的code执行不同的操作
       // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
       // 处理登录超时，没权限等情况
+      // todo 按多种code处理
       let timeoutMsg = '';
       switch (code) {
         case ResultEnum.TIMEOUT:
@@ -221,7 +189,7 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (error: any) => {
-    console.error('responseInterceptorsCatch: 555555555555555555')
+    console.error('responseInterceptorsCatch: 444444444444444444444')
     const { response, code, message, config } = error || {};
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none';
     const msg: string = response?.data?.error?.message ?? '';
@@ -295,8 +263,6 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
       isResponseTips: false,
       // 成功响应时弹窗的弹窗类型
       responseTipsMode: 'modal',
-      responseBlobDown: false,
-      responseBlobView: false,
       responseBlob: false,
       ...opt,
     },

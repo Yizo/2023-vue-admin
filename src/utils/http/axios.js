@@ -70,11 +70,12 @@ class VAxios {
     // Request interceptor configuration processing
     this.axiosInstance.interceptors.request.use((config) => {
       // 如果开启取消重复请求，则禁止取消重复请求
+      const { ignoreCancelToken } = config.requestOptions
       const ignoreCancel =
-        config.requestOptions?.ignoreCancelToken !== undefined
-          ? config.requestOptions?.ignoreCancelToken
+        ignoreCancelToken !== undefined
+          ? ignoreCancelToken
           : this.options.requestOptions?.ignoreCancelToken;
-      !ignoreCancel && axiosCanceler.addPending(config);
+      ignoreCancel && axiosCanceler.addPending(config);
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config, this.options);
       }
