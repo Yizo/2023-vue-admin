@@ -1,3 +1,7 @@
 // @ts-ignore
-import router from './router'
+import router, { generateRoutes } from './router'
+
+export {
+    generateRoutes
+}
 export default router

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import publicRoutes from './publicRoutes'
 
@@ -19,5 +19,9 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_APP_PUBLIC_PATH),
   routes: routes,
 });
+
+export function generateRoutes(){
+    return []
+}
 
 export default router;

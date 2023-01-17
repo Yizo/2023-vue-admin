@@ -28,7 +28,7 @@ const transform: AxiosTransform = {
    * @description: 请求之前处理config
    */
   beforeRequestHook: (config, options) => {
-    console.group('beforeRequestHook');
+    console.group('beforeRequestHook: 1111111111111111111');
     console.log(options);
     console.groupEnd();
     const { apiUrl, joinPrefix, urlPrefix } = options;
@@ -57,7 +57,7 @@ const transform: AxiosTransform = {
    * @description: 请求拦截器处理
    */
   requestInterceptors: (config, options) => {
-    console.group('requestInterceptors');
+    console.group('requestInterceptors: 222222222222222222222');
     console.log(options);
     console.groupEnd();
     // 请求之前处理config
@@ -76,7 +76,7 @@ const transform: AxiosTransform = {
    * @description: 请求成功处理。如果数据不是预期格式，可直接抛出错误
    */
   transformRequestHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    console.group('transformRequestHook');
+    console.group('transformRequestHook: 33333333333333333');
     console.log(res);
     console.log(options);
     console.groupEnd();
@@ -144,7 +144,7 @@ const transform: AxiosTransform = {
    */
   // @ts-ignore
   responseInterceptors: (res: any) => {
-    console.group('responseInterceptors');
+    console.group('responseInterceptors: 44444444444444444444');
     console.log('res', res);
     const { requestOptions } = res.config;
     const { responseBlob } = requestOptions;
@@ -221,6 +221,7 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: (error: any) => {
+    console.error('responseInterceptorsCatch: 555555555555555555')
     const { response, code, message, config } = error || {};
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none';
     const msg: string = response?.data?.error?.message ?? '';

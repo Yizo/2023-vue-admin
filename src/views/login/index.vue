@@ -39,7 +39,7 @@ const state = reactive({
 })
 function handleLogin(){
   store.login(state).then(()=>{
-    router.push({name: 'dashboard'})
+    // router.push({name: 'dashboard'})
   })
 }
 </script>
