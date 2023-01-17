@@ -31,7 +31,7 @@ function onCancel(){
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .content {
   word-wrap:break-word;
   max-width: 100%;

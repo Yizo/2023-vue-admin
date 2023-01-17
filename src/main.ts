@@ -11,7 +11,7 @@ import SvgIcon from './SvgIcon'
 
 // @ts-ignore
 import { antdVue } from '@/plugins'
-import './styles/reset.scss'
+import "ant-design-vue/dist/antd.variable.min.css";
 
 // @ts-ignore
 const app = createApp(App)

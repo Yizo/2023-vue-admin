@@ -1,9 +1,17 @@
+<!-- APP.vue -->
 <template>
-  <router-view/>
+  <a-config-provider>
+    <router-view />
+  </a-config-provider>
 </template>
+<script setup>
+import { reactive } from "vue";
+import { ConfigProvider } from "ant-design-vue";
 
-<script setup lang="ts">
+const colorState = reactive({
+  primaryColor: "#25b864"
+});
+ConfigProvider.config({
+  theme: colorState,
+});
 </script>
-
-<style scoped>
-</style>

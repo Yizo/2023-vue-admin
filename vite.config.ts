@@ -20,15 +20,32 @@ export default ({mode}) => {
       },
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.vue', '.json', '.less', '.scss', '.css']
     },
+    css: {
+        // postcss:{
+        //     plugins: [
+        //       require('autoprefixer')({
+        //           overrideBrowserslist: ['last 2 versions', 'not ie > 0']
+        //       })
+        //     ],
+        // },
+      preprocessorOptions: {
+          less: {
+              javascriptEnabled: true,
+              additionalData: `@import "@/styles/index.less";`
+          }
+      }
+    },
     plugins: [
         vue(),
         Components({
-          resolvers: [AntDesignVueResolver()],
+          resolvers: [AntDesignVueResolver({
+              importStyle: false
+          })],
         }),
         createSvgIconsPlugin({
           iconDirs: [path.resolve(process.cwd(), "src/SvgIcon/icons/svg")],
           symbolId: 'icon-[name]'
-        })
+        }),
     ],
     server: {
         host: true,

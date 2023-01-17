@@ -39,12 +39,12 @@ const state = reactive({
 })
 function handleLogin(){
   store.login(state).then(()=>{
-    // router.push({name: 'dashboard'})
+    router.push({name: 'dashboard'})
   })
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .login-warp {
   background-color: #fff;
   width: 100%;

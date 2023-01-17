@@ -15,7 +15,7 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
   .not-found {
     text-align: center;
     padding-top: 20%;

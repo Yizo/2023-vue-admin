@@ -41,7 +41,7 @@ const isExternal = computed(() => external(props.icon))
 const iconName = computed(() => `#icon-${props.icon}`)
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .svg-icon {
   width: 1em;
   height: 1em;
