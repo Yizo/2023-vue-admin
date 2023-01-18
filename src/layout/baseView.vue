@@ -13,9 +13,7 @@
         <Sidebar :data="data" :collapsed="collapsed" :handleToggle="handleToggle"/>
       </a-layout-sider>
       <a-layout-content class="main-container">
-        <div class="main">
-          <AppMain/>
-        </div>
+        <AppMain/>
         <a-layout-footer class="fixed-footer">Footer</a-layout-footer>
       </a-layout-content>
     </a-layout>
@@ -82,12 +80,9 @@ function handleToggle(){
       padding-left: v-bind(sideBarWidth2);
       display: flex;
       flex-direction: column;
-      .main {
-        flex: 1;
-        padding: 0 20px 20px;
-      }
       .fixed-footer {
         text-align: center;
+        background-color: transparent;
       }
     }
   }

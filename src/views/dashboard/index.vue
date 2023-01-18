@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-container">
+  <div class="dashboard-container page-main">
     dashboard-container
     <a-button @click="handleError">弹窗</a-button>
   </div>

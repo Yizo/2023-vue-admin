@@ -13,11 +13,10 @@ import Breadcrumb from './Breadcrumb/index.vue'
 
 <style lang="less" scoped>
 .app-main {
-  height: 100%;
+  flex: 1;
+  padding: 0px 20px 20px;
   .view-wrapper {
-    background: #fff;
-    padding: 16px;
-    height: 100%;
+
   }
 }
 </style>
