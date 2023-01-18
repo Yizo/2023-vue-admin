@@ -4,8 +4,13 @@
       <Navbar/>
     </a-layout-header>
     <a-layout class="content-wrapper">
-      <a-layout-sider theme="light" class="sidebar-container">
-        <Sidebar/>
+      <a-layout-sider theme="light"
+                      v-model:collapsed="collapsed"
+                      :width="sideBarWidth1" collapsible
+                      :collapsed-width="collapsedWidth"
+                      :trigger="null"
+                      class="sidebar-container">
+        <Sidebar :data="data" :collapsed="collapsed" :handleToggle="handleToggle"/>
       </a-layout-sider>
       <a-layout-content class="main-container">
         <div class="main">
@@ -19,9 +24,31 @@
 
 
 <script setup>
+import {computed, ref} from 'vue'
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar/index.vue'
 import AppMain from './components/AppMain.vue'
+import { generateRoutes } from '@/router'
+import { themeStore } from '@/store'
+
+const theme = themeStore()
+const collapsedWidth = ref(50)
+const collapsed = computed(()=>theme.$state.collapsed)
+const sideBarWidth1 = computed(()=>theme.$state.sideBarWidth)
+const sideBarWidth2 = computed(()=>{
+  if(collapsed.value) {
+    return collapsedWidth.value + 'px'
+  } else {
+    return theme.$state.sideBarWidth + 'px'
+  }
+})
+const data = ref([])
+data.value = generateRoutes()
+function handleToggle(){
+  theme.$patch({
+    'collapsed':!collapsed.value
+  })
+}
 </script>
 
 <style lang="less" scoped>
@@ -45,18 +72,15 @@ import AppMain from './components/AppMain.vue'
       left: 0;
       z-index: 99;
       height: 100%;
-      width: @sideBarWidth !important;
-      min-width: @sideBarWidth !important;
-      max-width: @sideBarWidth !important;
       transition: all .2s cubic-bezier(.34,.69,.1,1);
     }
     .main-container {
       min-height: 100vh;
       overflow-y: hidden;
-      background-color: var(--color-fill-2);
+      background-color: rgb(242 243 245);
       transition: padding .2s cubic-bezier(.34,.69,.1,1);
       padding-top: 64px;
-      padding-left: @sideBarWidth;
+      padding-left: v-bind(sideBarWidth2);
       display: flex;
       flex-direction: column;
       .main {

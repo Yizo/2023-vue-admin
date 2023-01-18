@@ -3,6 +3,7 @@
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       mode="inline"
+      @click="handleClick"
   >
     <menu-item v-for="route in data" :key="route.path" :route="route" />
   </a-menu>
@@ -15,9 +16,9 @@ export default {
 </script>
 <script setup lang="ts">
 import menuItem from './menu-item.vue'
-import {ref, defineProps, watch} from "vue";
+import {ref, defineProps, watch, computed} from "vue";
 import type { PropType } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const props = defineProps({
   data: {
@@ -27,17 +28,26 @@ const props = defineProps({
 })
 
 const route = useRoute()
+const router = useRouter()
 const selectedKeys = ref<string[]>([]);
 const openKeys = ref<string[]>([]);
-console.log(props.data)
+
+function handleClick({ key }) {
+  router.push(key)
+}
 
 watch(()=>route, (newRoute)=>{
-  console.log(newRoute)
   selectedKeys.value = [newRoute.path];
   openKeys.value = [newRoute.path];
 })
 </script>
 
-<style scoped>
-
+<style lang="less">
+.ant-layout-sider-collapsed {
+  .ant-menu-submenu-title {
+    .ant-menu-submenu-arrow {
+      display: none;
+    }
+  }
+}
 </style>

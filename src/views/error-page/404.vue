@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
     <svg-icon class-name="icon" icon="404"/>
-    <p>对不起，您没有访问该资源的权限</p>
+    <p>404, 找不到该页面</p>
     <a-button type="primary">返回</a-button>
   </div>
 </template>

@@ -7,7 +7,12 @@ const themeStore = defineStore({
     id: base + '-theme',
     state: ()=>{
         return {
-            primary: '#ccc'
+            // 主题色
+            primary: '#25b864',
+            // 侧边栏开收起
+            collapsed: false,
+            // 侧边栏宽度
+            sideBarWidth: 200,
         }
     },
     getters: {

@@ -7,9 +7,11 @@
 <script setup>
 import { reactive } from "vue";
 import { ConfigProvider } from "ant-design-vue";
+import { themeStore } from '@/store'
 
+const theme = themeStore()
 const colorState = reactive({
-  primaryColor: "#25b864"
+  primaryColor: theme.$state.primary
 });
 ConfigProvider.config({
   theme: colorState,

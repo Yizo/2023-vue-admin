@@ -1,4 +1,4 @@
-import { view } from '@/layout';
+import baseView from '@/layout/baseView.vue'
 
 const publicRoutes = [
   {
@@ -8,7 +8,7 @@ const publicRoutes = [
   {
     path: '/error',
     // 注意：带有路径“/”的记录中的组件“默认”是一个不返回 Promise 的函数
-    component: view,
+    component: baseView,
     redirect: '/error/404',
     children: [
       {
