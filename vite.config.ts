@@ -51,7 +51,7 @@ export default ({mode}) => {
         host: true,
         proxy: {
                 [`${env.VITE_APP_BASE_URL}/`]: {
-                target: 'http://192.168.21.92:3000/',
+                target: 'http://192.168.31.174:3000/',
                 changeOrigin: true,
                 secure: false,
                 rewrite: path => path.replace(new RegExp(`^${env.VITE_APP_BASE_URL}`), '')

@@ -1,6 +1,7 @@
 html, body {
 	margin: 0;
 	padding: 0;
+	background-color: rgb(242,243,245);
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -30,19 +31,28 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/* 滚动槽 */
+
 ::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
+	width: 5px;
+	height: 5px;
+	background-color: rgba(0,0,0,0);
+	-webkit-border-radius: 50px
 }
-::-webkit-scrollbar-track {
-	border-radius: 3px;
-	background: rgba(0,0,0,0.06);
-	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.08);
+
+::-webkit-scrollbar:hover {
+	background-color: rgba(0,0,0,.09)
 }
-/* 滚动条滑块 */
+
 ::-webkit-scrollbar-thumb {
-	border-radius: 3px;
-	background: rgba(0,0,0,0.12);
-	-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+	width: 10px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	background: rgba(201,205,212);
+	-webkit-border-radius: 100px
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+	background: rgba(201,205,212, 0.9);
+	-webkit-border-radius: 100px
 }

@@ -1,13 +1,15 @@
 <template>
-
+  <div class="app-main">
+appmain
+  </div>
 </template>
 
-<script>
-export default {
-  name: "AppMain"
-}
+<script setup lang="ts">
+
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.app-main {
 
+}
 </style>
