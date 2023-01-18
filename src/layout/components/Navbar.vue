@@ -1,6 +1,6 @@
 <template>
   <div>
-navbar
+    后台管理系统
   </div>
 </template>
 

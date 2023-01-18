@@ -9,10 +9,9 @@
 import { userStore } from '@/store'
 import { useModal } from '@/hook'
 const user = userStore()
-console.log(user.userInfo)
 
 const handleError = () => {
-  useModal({ title: '测试', content: '测试不通过!' })
+  useModal({ title: '测试', content: '测试通过!' + user.userInfo.userName })
 }
 </script>
 

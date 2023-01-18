@@ -1,25 +1,19 @@
-import { generateRoutes } from './index';
-
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css';
 import { Modal } from 'ant-design-vue'
-import { userStore } from '@/store'
+import { userStore, themeStore } from '@/store'
+import { whiteList } from './constants'
 
 export default (router) => {
-  NProgress.configure({ showSpinner: false }); // NProgress Configuration
-
-  const whiteList = [
-    '/login'
-  ]; // no redirect whitelist
+  NProgress.configure({ showSpinner: false });
 
   const store = userStore()
+  const theme = themeStore()
 
   router.beforeEach(async (to, from, next) => {
     Modal.destroyAll()
-    // start progress bar
     NProgress.start();
 
-    // set page title
     if (to.meta && to.meta.name) {
       document.title = to.meta.name;
     }
@@ -30,7 +24,7 @@ export default (router) => {
       next();
     } else {
       if (hasToken) {
-        next();
+        next()
       } else {
         next({
           path: '/login',
@@ -49,11 +43,10 @@ export default (router) => {
     NProgress.done();
   });
 
-  router.isReady().then(() => {
-    console.group('isReady');
-    console.log('添加前:', router.getRoutes());
-    generateRoutes();
-    console.log('添加后:', router.getRoutes());
-    console.groupEnd();
-  });
+  router.isReady().then(async ()=>{
+    console.log('isReady:1')
+    await theme.generateRoutes()
+    await router.replace(router.currentRoute.value.fullPath)
+    console.log(router.getRoutes())
+  })
 }

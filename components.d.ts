@@ -7,7 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
+    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
+    ACard: typeof import('ant-design-vue/es')['Card']
     AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
     AForm: typeof import('ant-design-vue/es')['Form']
     AFormItem: typeof import('ant-design-vue/es')['FormItem']

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+// @ts-ignore
 import router from './router'
 // @ts-ignore
 import permission from '@/router/permission'
@@ -15,11 +16,14 @@ import "ant-design-vue/dist/antd.variable.min.css";
 
 // @ts-ignore
 const app = createApp(App)
-app.use(router)
 app.use(store)
 app.use(antdVue)
 app.use(SvgIcon)
+app.use(router)
+app.use(permission(router))
+router.isReady().then(()=>{
+    console.log('isReady:2')
+    app.mount('#app')
+})
 
-app.mount('#app')
 
-permission(router)

@@ -28,7 +28,6 @@ import {computed, ref} from 'vue'
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar/index.vue'
 import AppMain from './components/AppMain.vue'
-import { generateRoutes } from '@/router'
 import { themeStore } from '@/store'
 
 const theme = themeStore()
@@ -42,8 +41,8 @@ const sideBarWidth2 = computed(()=>{
     return theme.$state.sideBarWidth + 'px'
   }
 })
-const data = ref([])
-data.value = generateRoutes()
+const data = computed(()=>theme.$state.menu)
+
 function handleToggle(){
   theme.$patch({
     'collapsed':!collapsed.value

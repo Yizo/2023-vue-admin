@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-wrapper">
-    <Menu :data="data" class="my-sidebar"></Menu>
+    <i-menu :data="data" class="my-sidebar"></i-menu>
     <span class="collapsed-wrapper" @click="handleToggle">
       <menu-fold-outlined v-if="!collapsed"/>
       <menu-unfold-outlined v-else/>
@@ -10,7 +10,7 @@
 <script lang="ts" setup>
 import {defineProps} from 'vue';
 import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
-import Menu from './menu.vue'
+import IMenu from './menu.vue'
 
 const props = defineProps({
   data: {

@@ -1,5 +1,5 @@
-import view from './view.vue'
+import iView from './iView.vue'
 
 export {
-    view
+    iView
 }
