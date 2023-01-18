@@ -39,6 +39,9 @@ function handleClick({ key }) {
 watch(()=>route, (newRoute)=>{
   selectedKeys.value = [newRoute.path];
   openKeys.value = [newRoute.path];
+}, {
+  immediate: true,
+  deep: true
 })
 </script>
 
@@ -47,6 +50,14 @@ watch(()=>route, (newRoute)=>{
   .ant-menu-submenu-title {
     .ant-menu-submenu-arrow {
       display: none;
+    }
+  }
+  .ant-menu-inline-collapsed {
+    .ant-menu-item {
+      text-overflow: inherit;
+      .ant-menu-title-content {
+        display: none;
+      }
     }
   }
 }
