@@ -1,28 +1,15 @@
 <template>
   <div class="sidebar-wrapper">
     <i-menu :data="data" class="my-sidebar"></i-menu>
-    <span class="collapsed-wrapper" @click="handleToggle">
-      <menu-fold-outlined v-if="!collapsed"/>
-      <menu-unfold-outlined v-else/>
-    </span>
   </div>
 </template>
 <script lang="ts" setup>
 import {defineProps} from 'vue';
-import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
 import IMenu from './menu.vue'
 
 const props = defineProps({
   data: {
     type: Array,
-    required: true
-  },
-  collapsed: {
-    type: Boolean,
-    required: true
-  },
-  handleToggle: {
-    type: Function,
     required: true
   }
 });
@@ -41,22 +28,6 @@ const props = defineProps({
     height: 100%;
     overflow: auto;
     overflow-x: hidden;
-  }
-  .collapsed-wrapper {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 3px;
-    cursor: pointer;
-    background-color: rgb(247,248,250);
-    &:hover {
-      background-color: rgb(229,230,235);
-    }
   }
 }
 </style>

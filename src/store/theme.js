@@ -1,6 +1,6 @@
 
 import { defineStore } from 'pinia'
-import baseView from "@/layout/baseView.vue";
+import { page2, page1 } from "@/layout";
 import router, { getRouteList, errRoute } from "@/router";
 
 const base = import.meta.env.VITE_APP_PUBLIC_PATH
@@ -64,28 +64,7 @@ const themeStore = defineStore({
                             "redirect": "",
                             "hidden": 0,
                             "apis": null,
-                            "childMenuList": [],
-                            "parentMenuInfo": {
-                                "menuId": "9937133062572351",
-                                "menuName": "审计管理",
-                                "parentMenuId": null,
-                                "menuType": null,
-                                "menuUri": null,
-                                "icon": null,
-                                "priority": null,
-                                "roleMenuSwitch": null,
-                                "remark": null,
-                                "operatorId": null,
-                                "component": null,
-                                "showSwitch": null,
-                                "menuCode": null,
-                                "expand": null,
-                                "redirect": null,
-                                "hidden": null,
-                                "apis": null,
-                                "childMenuList": null,
-                                "parentMenuInfo": null
-                            }
+                            "childMenuList": []
                         },
                         {
                             "menuId": "9937133062572353",
@@ -105,28 +84,7 @@ const themeStore = defineStore({
                             "redirect": "",
                             "hidden": 1,
                             "apis": null,
-                            "childMenuList": [],
-                            "parentMenuInfo": {
-                                "menuId": "9937133062572351",
-                                "menuName": "审计管理",
-                                "parentMenuId": null,
-                                "menuType": null,
-                                "menuUri": null,
-                                "icon": null,
-                                "priority": null,
-                                "roleMenuSwitch": null,
-                                "remark": null,
-                                "operatorId": null,
-                                "component": null,
-                                "showSwitch": null,
-                                "menuCode": null,
-                                "expand": null,
-                                "redirect": null,
-                                "hidden": null,
-                                "apis": null,
-                                "childMenuList": null,
-                                "parentMenuInfo": null
-                            }
+                            "childMenuList": []
                         },
                         {
                             "menuId": "9937133062572354",
@@ -146,31 +104,9 @@ const themeStore = defineStore({
                             "redirect": "",
                             "hidden": 1,
                             "apis": null,
-                            "childMenuList": [],
-                            "parentMenuInfo": {
-                                "menuId": "9937133062572351",
-                                "menuName": "审计管理",
-                                "parentMenuId": null,
-                                "menuType": null,
-                                "menuUri": null,
-                                "icon": null,
-                                "priority": null,
-                                "roleMenuSwitch": null,
-                                "remark": null,
-                                "operatorId": null,
-                                "component": null,
-                                "showSwitch": null,
-                                "menuCode": null,
-                                "expand": null,
-                                "redirect": null,
-                                "hidden": null,
-                                "apis": null,
-                                "childMenuList": null,
-                                "parentMenuInfo": null
-                            }
+                            "childMenuList": []
                         }
-                    ],
-                    "parentMenuInfo": null
+                    ]
                 },
                 {
                     "menuId": "9937100000000001",
@@ -202,7 +138,7 @@ const themeStore = defineStore({
                             "roleMenuSwitch": 0,
                             "remark": "运营n",
                             "operatorId": "1",
-                            "component": "/ManageCenter/sealManage",
+                            "component": "/manageCenter/sealManage",
                             "showSwitch": 1,
                             "menuCode": "",
                             "expand": 0,
@@ -957,27 +893,7 @@ const themeStore = defineStore({
                                     "apis": null,
                                     "childMenuList": []
                                 }
-                            ],
-                            "parentMenuInfo": {
-                                "menuId": "794965488869445632",
-                                "menuName": "系统账号",
-                                "parentMenuId": null,
-                                "menuType": null,
-                                "menuUri": null,
-                                "icon": null,
-                                "priority": null,
-                                "roleMenuSwitch": null,
-                                "remark": null,
-                                "operatorId": null,
-                                "component": null,
-                                "showSwitch": null,
-                                "menuCode": null,
-                                "expand": null,
-                                "redirect": null,
-                                "hidden": null,
-                                "apis": null,
-                                "childMenuList": null
-                            }
+                            ]
                         }
                     ]
                 }
@@ -986,7 +902,7 @@ const themeStore = defineStore({
             const routes = [
                 {
                     path: '/',
-                    component: baseView,
+                    component: page2,
                     children: [
                         {
                             path: '/dashboard',

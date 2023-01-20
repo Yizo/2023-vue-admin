@@ -2,7 +2,6 @@
   <a-menu
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
-      trigger-sub-menu-action="click"
       mode="inline"
       @click="handleClick"
   >

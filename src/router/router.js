@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import iView from '@/layout/iView.vue'
+import { view } from '@/layout'
 import { publicRoutes, whiteList } from './constants'
 
 export const components = import.meta.glob('@/views/**/*.vue')
 
 export function _import(path) {
-    return components['@/views' + path]
+    return components['/src/views' + path + '.vue']
 }
 
 export function getRouteList(data) {
@@ -39,7 +39,7 @@ export function getRouteList(data) {
                 // 路由组件
                 const str = component.substr(0, 7);
                 if (component === 'layout') {
-                    route.component = iView;
+                    route.component = view;
                 } else {
                     route.component = _import(component);
                 }
