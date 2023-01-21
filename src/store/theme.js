@@ -24,6 +24,9 @@ const themeStore = defineStore({
         }
     },
     actions: {
+        reset() {
+          this.$reset()
+        },
         generateRoutes(){
             console.log('------------------------------generateRoutes----------------------------------')
             const data = [
