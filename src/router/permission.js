@@ -34,9 +34,8 @@ export default (router) => {
           },
         });
       }
-
-      NProgress.done();
     }
+    NProgress.done();
   });
 
   router.afterEach(() => {

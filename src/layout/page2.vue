@@ -8,18 +8,24 @@
                     class="sidebar-container">
       <logo style="padding: 16px 0; margin-left: 20px" v-if="!collapsed"></logo>
       <Sidebar :data="data"/>
+      <!--start:展开收起按钮-->
+      <span class="collapsed-wrapper" @click="handleToggle">
+        <menu-fold-outlined v-if="!collapsed"/>
+        <menu-unfold-outlined v-else/>
+      </span>
+      <!--end:展开收起按钮-->
     </a-layout-sider>
     <a-layout class="content-wrapper">
       <a-layout-header class="fixed-header">
-        <!--start:展开收起按钮-->
-        <span class="collapsed-wrapper" @click="handleToggle">
-          <menu-fold-outlined v-if="!collapsed"/>
-          <menu-unfold-outlined v-else/>
-        </span>
-        <!--end:展开收起按钮-->
+        <div class="features">
+          <Breadcrumb style="padding: 8px 0;"/>
+          <div>
+            <user></user>
+          </div>
+        </div>
       </a-layout-header>
       <a-layout-content class="main-container">
-        <Breadcrumb style="padding: 8px 0;margin-left: 16px;"/>
+        <TagView/>
         <baseView/>
         <a-layout-footer class="fixed-footer">Footer</a-layout-footer>
       </a-layout-content>
@@ -31,10 +37,12 @@
 <script setup>
 import {computed, ref} from 'vue'
 import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
-import logo from './components/Logo/index.vue'
+import logo from './components/Header/logo.vue'
+import user from './components/Header/user.vue'
 import Sidebar from './components/Sidebar/index.vue'
 import baseView from './components/View/baseView.vue'
 import Breadcrumb from './components/Breadcrumb/index.vue'
+import TagView from './components/TagView/index.vue'
 import { themeStore } from '@/store'
 
 const theme = themeStore()
@@ -68,6 +76,22 @@ function handleToggle(){
     z-index: 100;
     height: 100%;
     transition: all .2s cubic-bezier(.34,.69,.1,1);
+    .collapsed-wrapper {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 3px;
+      cursor: pointer;
+      background-color: rgb(247,248,250);
+      &:hover {
+        background-color: rgb(229,230,235);
+      }
+    }
   }
   .content-wrapper {
     flex: 1;
@@ -82,15 +106,11 @@ function handleToggle(){
       right: 0;
       z-index: 99;
       margin-left: v-bind(sideBarWidth2);
-      .collapsed-wrapper {
-        width: 24px;
-        height: 24px;
-        border-radius: 3px;
-        cursor: pointer;
-        background-color: rgb(247,248,250);
-        &:hover {
-          background-color: rgb(229,230,235);
-        }
+      .features {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        justify-content: space-between;
       }
     }
     .main-container {
@@ -101,6 +121,9 @@ function handleToggle(){
       display: flex;
       flex-direction: column;
       padding-top: 64px;
+      .base-view-wrapper {
+        margin-top: 16px;
+      }
       .fixed-footer {
         text-align: center;
         background-color: transparent;

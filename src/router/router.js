@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { view } from '@/layout'
+import { myView } from '@/layout'
 import { publicRoutes, whiteList } from './constants'
 
 export const components = import.meta.glob('@/views/**/*.vue')
@@ -39,7 +39,7 @@ export function getRouteList(data) {
                 // 路由组件
                 const str = component.substr(0, 7);
                 if (component === 'layout') {
-                    route.component = view;
+                    route.component = myView;
                 } else {
                     route.component = _import(component);
                 }

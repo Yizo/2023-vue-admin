@@ -31,7 +31,7 @@
 <script setup>
 import {computed, ref} from 'vue'
 import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
-import logo from './components/Logo/index.vue'
+import logo from './components/Header/logo.vue'
 import Sidebar from './components/Sidebar/index.vue'
 import baseView from './components/View/baseView.vue'
 import Breadcrumb from './components/Breadcrumb/index.vue'

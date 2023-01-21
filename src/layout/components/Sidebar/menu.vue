@@ -40,8 +40,7 @@ watch(()=>route, (newRoute)=>{
   selectedKeys.value = [newRoute.path];
   openKeys.value = [newRoute.path];
 }, {
-  immediate: true,
-  deep: true
+  immediate: true
 })
 </script>
 
