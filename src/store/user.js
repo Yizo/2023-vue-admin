@@ -48,7 +48,7 @@ const userStore = defineStore({
             this.reset()
             tagView.reset()
             theme.reset()
-            // resetRouter()
+            resetRouter()
         },
         outLogin() {
             // TODO: 调用退出登录接口

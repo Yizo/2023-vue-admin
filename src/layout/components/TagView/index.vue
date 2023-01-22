@@ -49,6 +49,7 @@ const onClick = (key) => {
       ...store.$state.tagsViewObj[key].params
     }
   })
+  store.setCurrentTag(key)
   closeMenu()
 }
 const onClose = (key) => {
@@ -83,7 +84,8 @@ const closeMenu = (e) => {
 watch(()=>route, (route)=>{
   store.addTagsViewList(route)
 }, {
-  immediate: true
+  immediate: true,
+  deep: true
 })
 
 /**

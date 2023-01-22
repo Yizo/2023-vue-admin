@@ -19,7 +19,8 @@
       <a-layout-header class="fixed-header">
         <div class="features">
           <Breadcrumb style="padding: 8px 0;"/>
-          <div>
+          <div class="flex">
+            <Search class="mr-16"></Search>
             <user></user>
           </div>
         </div>
@@ -43,6 +44,7 @@ import Sidebar from './components/Sidebar/index.vue'
 import baseView from './components/View/baseView.vue'
 import Breadcrumb from './components/Breadcrumb/index.vue'
 import TagView from './components/TagView/index.vue'
+import Search from './components/Search/index.vue'
 import { themeStore } from '@/store'
 
 const theme = themeStore()
