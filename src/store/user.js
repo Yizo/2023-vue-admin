@@ -35,11 +35,19 @@ const userStore = defineStore({
             const self = this
             const theme = themeStore()
             return new Promise((resolve, reject)=>{
-                fetchLogin(data).then(res=>{
-                    theme.generateRoutes()
-                    self.setLogin(res)
-                    resolve(res)
-                })
+                // todo
+                // fetchLogin(data).then(res=>{
+                //     theme.generateRoutes()
+                //     self.setLogin(res)
+                //     resolve(res)
+                // })
+                const res = {
+                    "userName": "admin",
+                    "token": "ac0da95f-e5d5-40f8-a094-991973efb4b4"
+                }
+                theme.generateRoutes()
+                self.setLogin(res)
+                resolve(res)
             })
         },
         resetUser(){

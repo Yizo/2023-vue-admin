@@ -12,6 +12,9 @@ export default ({mode}) => {
   // @ts-ignore
   return defineConfig({
     base: env.VITE_APP_PUBLIC_PATH,
+    build: {
+      outDir: 'docs'
+    },
     resolve: {
       alias: {
         // @ts-ignore
