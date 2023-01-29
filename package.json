@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:admin": "vite --config ./apps/admin/vite.config.ts --mode development",
+    "dev:admin": "vite --mode development",
     "build": "vite build",
     "preview": "vite preview"
   },

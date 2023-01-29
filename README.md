@@ -1,5 +1,8 @@
-# Vue 3 + TypeScript + Vite + m
+# Vue 3 + TypeScript + Vite + monorepo
 
+## 运行
+1. 安装全局依赖
+2. 进入 apps/admin 运行`npm run dev`
 
 ## **安装依赖**
 ### 安装全局依赖
@@ -26,6 +29,3 @@ pnpm i 待安装到子包 -F 子包
 
 ## 预览地址
 [https://yizo.github.io/2023-vue-admin](https://yizo.github.io/2023-vue-admin)
-
-## 参考
-[All in one：项目级 monorepo 策略最佳实践](https://fed.taobao.org/blog/taofed/do71ct/uihagy/)
