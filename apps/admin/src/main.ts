@@ -10,22 +10,22 @@ import store from './store'
 import 'virtual:svg-icons-register'
 // @ts-ignore
 import SvgIcon from '@/SvgIcon'
+// @ts-ignore
+import gmComponents from '@gm/components'
 
 // @ts-ignore
-import { antdVue, wujie } from '@gm/plugins'
+import { antdVue } from '@gm/plugins'
 import "ant-design-vue/dist/antd.variable.min.css";
 
-wujie(()=>{
-    // @ts-ignore
-    const app = createApp(App)
-    app.use(store)
-    app.use(antdVue)
-    app.use(SvgIcon)
-    app.use(router)
-    app.use(permission(router))
-    router.isReady().then(()=>{
-        app.mount('#app')
-    })
+const app = createApp(App)
+app.use(store)
+app.use(antdVue)
+app.use(SvgIcon)
+app.use(router)
+app.use(permission(router))
+app.use(gmComponents)
+router.isReady().then(()=>{
+    app.mount('#app')
 })
 
 

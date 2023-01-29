@@ -15,7 +15,6 @@
     "@gm/layout": "workspace:^1.0.0",
     "@gm/plugins": "workspace:^1.0.0",
     "@gm/styles": "workspace:^1.0.0",
-    "@gm/svg-icon": "workspace:^1.0.0",
     "@gm/utils": "workspace:^1.0.0"
   }
 }
