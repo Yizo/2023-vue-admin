@@ -1,18 +1,14 @@
-import NProgress from 'nprogress'; // progress bar
-import 'nprogress/nprogress.css';
 import { Modal } from 'ant-design-vue'
 import { userStore, themeStore } from '@/store'
 import { whiteList } from './constants'
 
 export default (router) => {
-  NProgress.configure({ showSpinner: false });
 
   const store = userStore()
   const theme = themeStore()
 
   router.beforeEach(async (to, from, next) => {
     Modal.destroyAll()
-    NProgress.start();
 
     if (to.meta && to.meta.name) {
       document.title = to.meta.name;
@@ -35,11 +31,6 @@ export default (router) => {
         });
       }
     }
-    NProgress.done();
-  });
-
-  router.afterEach(() => {
-    NProgress.done();
   });
 
   router.isReady().then(async ()=>{

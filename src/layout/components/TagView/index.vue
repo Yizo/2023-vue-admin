@@ -106,7 +106,8 @@ watch(visible, val => {
   background-color: #fff;
   display: flex;
   justify-content: flex-start;
-  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.2);
+  // box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
   :deep(.ant-tabs-nav) {
     margin: 0;
     padding: 6px 16px;

@@ -71,7 +71,7 @@ function handleToggle(){
   .content-wrapper {
     display: flex;
     .sidebar-container {
-      box-shadow: 0 2px 5px 0 rgb(0 0 0 / 8%);
+      box-shadow: -1px 10px 10px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
       position: fixed;
       padding-top: 64px;
       top: 0;
@@ -99,7 +99,7 @@ function handleToggle(){
     .main-container {
       min-height: 100vh;
       overflow-y: hidden;
-      background-color: rgb(242 243 245);
+      background-color: #eef1f5;
       transition: padding .2s cubic-bezier(.34,.69,.1,1);
       padding-top: 64px;
       padding-left: v-bind(sideBarWidth2);
