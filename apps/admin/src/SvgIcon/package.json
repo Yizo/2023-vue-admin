@@ -1,0 +1,12 @@
+{
+  "name": "@gm/svg-icon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@gm/utils": "workspace:^1.0.0"
+  }
+}

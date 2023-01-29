@@ -1,0 +1,12 @@
+{
+  "name": "@gm/layout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@gm/styles": "workspace:^1.0.0"
+  }
+}

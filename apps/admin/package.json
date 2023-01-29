@@ -1,0 +1,22 @@
+{
+  "name": "admin",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode development",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@gm/components": "workspace:^1.0.0",
+    "@gm/enums": "workspace:^1.0.0",
+    "@gm/hook": "workspace:^1.0.0",
+    "@gm/layout": "workspace:^1.0.0",
+    "@gm/plugins": "workspace:^1.0.0",
+    "@gm/styles": "workspace:^1.0.0",
+    "@gm/svg-icon": "workspace:^1.0.0",
+    "@gm/utils": "workspace:^1.0.0"
+  }
+}
+

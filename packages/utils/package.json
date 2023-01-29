@@ -1,0 +1,13 @@
+{
+  "name": "@gm/utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@gm/enums": "workspace:^1.0.0",
+    "@gm/hook": "workspace:^1.0.0"
+  }
+}
