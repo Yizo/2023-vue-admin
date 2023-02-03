@@ -17,3 +17,15 @@ export function isFunction(val: any): val is Record<any, any> {
 export function isArray(val: any): val is Record<any, any> {
     return val !== null && is(val, 'Array');
 }
+
+
+/**
+ * 返回min-max 之间的 n
+ * @param {number} n 中间值
+ * @param {number} min 最小值
+ * @param {number} max 最大值
+ * @returns {number}
+ * */
+export function clamp(n: number, min: number, max: number){
+    return Math.min(max, Math.max(min, n));
+}
