@@ -1,66 +1,86 @@
-import type { ModalProps } from 'ant-design-vue'
+import { h, render, ref } from 'vue'
 import modal from './modal.vue'
-import { h, render } from 'vue'
+import { Props } from './types'
+export * from'./FactoryModal'
 
-export function useModal(props: ModalProps) {
-    const btnProps = {
-        text: '取消',
+export function getBtns(props: Props) {
+    return [{
+        text: props.cancelText || '取消',
         props: {
-            size: 'large',
-            type: 'primary'
-        },
-        onclick: (cancel: any)=>{
-            cancel()
+            ...props.cancelButtonProps
         }
+    },{
+        text: props.okText || '确定',
+        props: {
+            type: props.okType ||'primary',
+            ...props.okButtonProps
+        }
+    }]
+}
+
+function useLoading(){
+    const loading = ref(false)
+    const loadingIndex = ref(-1)
+    const openLoading = (index: number) => {
+        loading.value = true
+        loadingIndex.value = index
     }
-    // @ts-ignore
-    const btns = props && props.btns ? props.btns.map(btn=>{
+    const closeLoading = () => {
+        loading.value = false
+        loadingIndex.value = -1
+    }
+    return {
+        loading, loadingIndex, openLoading, closeLoading
+    }
+}
+function useModal(props: Props) {
+    const btns = props.btns ? props.btns.map(btn=>{
         return {
             text: btn.text,
             props: {
-                ...btnProps.props,
                 ...btn.props
             },
-            onclick: btn.onclick
+            onclick: btn?.onclick
         }
-    }) : [btnProps]
+    }) : getBtns(props)
     const options = {
-        destroyOnClose: true,
-        maskClosable: false,
-        title: '提示',
-        content: '',      // 显示内容
-        type: 'success', // success || error
         ...props,
-        // 显示的按钮
         btns,
-        destroy: () => {
-            render(null, document.body)
-        }
-    }
+        destroy: () => close()
+    } as Props
 
-    // @ts-ignore
     const node = h(modal, {
-        attrs: {
+        props: {
+            _functional: true,
+            visible: true,
+            destroyOnClose: true,
+            maskClosable: false,
+            type: 'info',
+            closable: true,
+            cancelText: '取消',
+            okText: '确定',
+            okType: 'primary',
+            title: '',
             ...options,
-        }
+        },
     })
+    const open = () => {
+        render(node, document.body)
+    }
 
-    render(node, document.body)
+    const close = () => {
+        render(null, document.body)
+    }
+
+    return {
+        open,
+        close
+    }
 
 }
 
-export function errorModal(props: ModalProps) {
-    const options = {
-        type: 'error',
-        ...props
-    }
-    useModal(options)
-}
-
-export function successModal(props: ModalProps) {
-    const options = {
-        type: 'success',
-        ...props
-    }
-    useModal(options)
+export {
+    modal,
+    useModal,
+    useLoading
 }
