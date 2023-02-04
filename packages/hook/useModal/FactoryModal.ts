@@ -11,81 +11,61 @@ function factory(props: Props, type?: Props["type"]): ModalInstaceReturun {
 /**
  * 错误消息弹窗
  * */
-function errorModal(title: string | Props, content: string|undefined, props: Props|undefined): ModalInstaceReturun{
-    let options: Props = {}
-    if(typeof title === 'string'){
-        options['title'] = title
-        options.content = content
-        options = {
-            ...options,
+function errorModal(title: string|Props, content?: string, props?: Props): ModalInstaceReturun{
+    if(typeof title === "string"){
+        return factory({
+            title,
+            content,
             ...props
-        }
+        }, 'error')
     } else {
-        options = {
-            ...title
-        }
+        return factory(title, 'error')
     }
-    return factory(options, 'error')
 }
 
 /**
  * 成功消息弹窗
  * */
-function successModal(title: string | Props, content: string|undefined, props: Props|undefined): ModalInstaceReturun{
-    let options: Props = {}
-    if(typeof title === 'string'){
-        options['title'] = title
-        options.content = content
-        options = {
-            ...options,
+function successModal(title: string|Props, content?: string, props?: Props): ModalInstaceReturun{
+    if(typeof title === "string") {
+        return factory({
+            title,
+            content,
             ...props
-        }
+        }, 'success')
     } else {
-        options = {
-            ...title
-        }
+        return factory(title, 'success')
     }
-    return factory(options, 'success')
 }
 
 /**
  * 警告弹窗
  * */
-function warningModal(title: string | Props, content: string|undefined, props: Props|undefined): ModalInstaceReturun{
-    let options: Props = {}
+function warningModal(title: string | Props, content?: string, props?: Props): ModalInstaceReturun{
     if(typeof title === 'string'){
-        options['title'] = title
-        options.content = content
-        options = {
-            ...options,
+        return factory({
+            title,
+            content,
             ...props
-        }
+        }, 'warning')
     } else {
-        options = {
-            ...title
-        }
+        return factory(title, 'warning')
     }
-    return factory(options, 'warning')
 }
 
 /**
  * 普通弹窗
  * */
-function infoModal(title: string | Props, content: string|undefined, props: Props|undefined): ModalInstaceReturun {
-    let options: Props = {}
-   if(typeof title === 'string'){
-       options['title'] = title
-       options.content = content
-       options = {
-           ...options,
-           ...props
-       }
-   } else {
-       options = {
-           ...title
-       }
-   }
-   return factory(options)
+function infoModal(title: string|Props, content?: string, props?: Props): ModalInstaceReturun {
+    if(typeof title === 'string'){
+        return factory({
+            title,
+            content,
+            ...props
+        })
+    } else {
+        return factory(title)
+    }
 }
 
 export  {

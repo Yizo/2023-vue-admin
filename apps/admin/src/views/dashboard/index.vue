@@ -64,17 +64,17 @@ const { open } = useModal({ title: '测试', content: '测试通过!' + user.use
 // })
 
 function open1() {
-  successModal({title: '成功', content: '测试成功'})
+  successModal('成功','测试成功')
 }
 function open2() {
-  errorModal({title: '失败', content: '测试失败'})
+  errorModal('失败','测试失败')
 }
 function open3() {
-  warningModal({title: '警告', content: '查看信息'})
+  warningModal('警告','查看信息')
 }
 
 function open4() {
-  infoModal({title: '查看', content: '查看信息', titleTips: '您有新消息'})
+  infoModal('查看','查看信息',{ titleTips: '您有新消息'})
 }
 
 function open5() {
