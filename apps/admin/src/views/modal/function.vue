@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard-container page-main">
+    <h1>封装的服务式弹窗</h1>
     <div>
-      <h1>组件弹窗</h1>
+      <h2>组件弹窗</h2>
       <div>
         <a-button @click="aOpen">原始弹窗</a-button>
         <a-modal v-model:visible="aVisible" @cancel="aClose">
@@ -11,9 +12,9 @@
       </div>
     </div>
     <div class="mt-16">
-      <h1>函数组件</h1>
+      <h2>函数组件</h2>
       <div>
-        <h2>消息类型</h2>
+        <h3>消息类型</h3>
         <div class="h2-warp">
           <a-button @click="open1">成功函数弹窗</a-button>
           <a-button class="ml-16" @click="open2">失败函数弹窗</a-button>
@@ -23,7 +24,7 @@
         </div>
       </div>
       <div class="mt-16">
-        <h2>按钮控制</h2>
+        <h3>按钮控制</h3>
         <div class="h2-warp">
           <a-button @click="open6">确定自动关闭</a-button>
           <a-button @click="open7" class="ml-16">确定不关闭</a-button>

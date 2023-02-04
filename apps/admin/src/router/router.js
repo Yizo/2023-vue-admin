@@ -8,6 +8,16 @@ export function _import(path) {
     return components['/src/views' + path + '.vue']
 }
 
+/**
+ * 过滤非隐藏的子路由
+ * */
+const getChildRoute = (children) => {
+    if (children) {
+        return children.filter((route) => route.meta.hidden !== true);
+    }
+    return [];
+};
+
 export function getRouteList(data) {
     return (
         data
@@ -23,9 +33,13 @@ export function getRouteList(data) {
                     menuCode = '',
                     component,
                     hidden,
+                    alias,
                     childMenuList = [],
+                    ...data
                 } = item;
                 const route = {
+                    ...data,
+                    children: [],
                     meta: { name: '', icon: '', menuCode: '', menuType: 1, hidden: 0 },
                 };
                 // 路由地址
@@ -50,6 +64,12 @@ export function getRouteList(data) {
                 if (childMenuList && childMenuList.length) {
                     route.children = [...getRouteList(childMenuList)];
                 }
+
+                // 别名
+                if(alias) {
+                    route['alias'] = alias;
+                }
+
                 return route;
             })
     );

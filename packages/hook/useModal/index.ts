@@ -1,9 +1,9 @@
 import { h, render, ref } from 'vue'
 import modal from './modal.vue'
-import { Props } from './types'
+import { Props as ModalProps } from './types'
 export * from'./FactoryModal'
 
-export function getBtns(props: Props) {
+export function getBtns(props: ModalProps) {
     return [{
         text: props.cancelText || '取消',
         props: {
@@ -33,7 +33,7 @@ function useLoading(){
         loading, loadingIndex, openLoading, closeLoading
     }
 }
-function useModal(props: Props) {
+function useModal(props: ModalProps) {
     const btns = props.btns ? props.btns.map(btn=>{
         return {
             text: btn.text,
@@ -47,7 +47,7 @@ function useModal(props: Props) {
         ...props,
         btns,
         destroy: () => close()
-    } as Props
+    } as ModalProps
 
     const node = h(modal, {
         props: {
@@ -83,4 +83,8 @@ export {
     modal,
     useModal,
     useLoading
+}
+
+export type {
+    ModalProps
 }

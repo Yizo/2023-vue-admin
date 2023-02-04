@@ -1,8 +1,8 @@
 <template>
   <a-menu
-      v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       mode="inline"
+      :inlineCollapsed="false"
       @click="handleClick"
   >
     <menu-item v-for="route in data" :key="route.path" :route="route" />
@@ -38,7 +38,6 @@ function handleClick({ key }) {
 
 watch(()=>route, (newRoute)=>{
   selectedKeys.value = [newRoute.path];
-  openKeys.value = [newRoute.path];
 }, {
   immediate: true,
   deep: true

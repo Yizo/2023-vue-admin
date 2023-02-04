@@ -36,7 +36,7 @@ const getBreadcrumbData = () => {
   breadcrumbData.value = route.matched.filter((item: any)=>item.meta && item.meta.name)
 }
 
-watch(()=>route, ()=>getBreadcrumbData(), { immediate: true})
+watch(()=>route, ()=>getBreadcrumbData(), { immediate: true, deep: true})
 
 </script>
 

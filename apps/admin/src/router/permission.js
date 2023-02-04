@@ -34,11 +34,9 @@ export default (router) => {
   });
 
   router.isReady().then(async ()=>{
-    console.log('isReady:1')
     if(store.$state.token) {
       await theme.generateRoutes()
       await router.replace(router.currentRoute.value.fullPath)
     }
-    console.log(router.getRoutes())
   })
 }

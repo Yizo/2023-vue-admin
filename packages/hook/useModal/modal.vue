@@ -146,18 +146,32 @@ function handleIcnClick(e: PointerEvent) {
   isFull.value =!isFull.value
 }
 
-async function handleBtnClick(index, btn) {
+function handleBtnClick(index, btn) {
   if(!btn.onclick) {
     return onCancel()
   }
   if(loading.value && loadingIndex.value !== -1) return
   try{
     openLoading(index)
-    await btn.onclick(onCancel)
-    closeLoading()
-    onCancel()
+    const data = btn.onclick(onCancel)
+    if(data instanceof Promise) {
+      data.then(res=>{
+        closeLoading()
+        if(res === undefined) {
+          onCancel()
+        }
+      }).catch(()=>{
+        closeLoading()
+      })
+    } else {
+      closeLoading()
+      if(data === undefined) {
+        onCancel()
+      }
+    }
   }catch (e) {
     closeLoading()
+    new Error(e)
   }
 }
 

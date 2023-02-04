@@ -1,12 +1,10 @@
 <template>
-<div class="page-main" style="height: 1500px">
-  审计任务
-</div>
+  <div>table3</div>
 </template>
 
 <script>
 export default {
-  name: "index"
+  name: "table3"
 }
 </script>
 
