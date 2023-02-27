@@ -153,11 +153,12 @@ function handleBtnClick(index, btn) {
   if(loading.value && loadingIndex.value !== -1) return
   try{
     openLoading(index)
+    // 返回为真时不关闭弹窗
     const data = btn.onclick(onCancel)
     if(data instanceof Promise) {
       data.then(res=>{
         closeLoading()
-        if(res === undefined) {
+        if(!res) {
           onCancel()
         }
       }).catch(()=>{
@@ -165,7 +166,7 @@ function handleBtnClick(index, btn) {
       })
     } else {
       closeLoading()
-      if(data === undefined) {
+      if(!data) {
         onCancel()
       }
     }

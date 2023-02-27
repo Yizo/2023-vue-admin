@@ -113,7 +113,7 @@ function open7() {
 
     onclick: () => {
       console.log('不关闭')
-      return false
+      return true
     }
 
   },{
@@ -153,7 +153,6 @@ function open9() {
     props: {
       type: 'primary'
     },
-
     onclick: () => {
       const fn = (timeout: number) => {
         return new Promise((resolve) => {
@@ -164,7 +163,7 @@ function open9() {
       }
       return new Promise(async (resolve) => {
         await fn(5000)
-        resolve(true)
+        resolve(true as any)
       })
     }
 
@@ -190,17 +189,17 @@ function open10() {
       }
       return new Promise(async (resolve) => {
         await fn(5000)
-        resolve(true)
+        resolve(true as any)
         setTimeout(()=>{
           cancel()
-        })
+        }, 4000)
       })
     }
 
   },{
     text: '取消'
   }] as ModalProps['btns']
-  infoModal('异步手动关闭','查看信息',{ titleTips: '您有新消息', btns})
+  infoModal('异步手动关闭','loading完成4秒后手动关闭',{ titleTips: '您有新消息', btns})
 }
 function modal() {
   const aVisible = ref(false)

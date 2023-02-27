@@ -166,6 +166,29 @@ const themeStore = defineStore({
                         }
                     ]
                 },
+                {
+                    "menuId": "1000001",
+                    "menuName": "hooks",
+                    "menuType": 1,
+                    "menuUri": "/hooks",
+                    "icon": "article",
+                    "component": "layout",
+                    "menuCode": "",
+                    "hidden": 0,
+                    "childMenuList": [
+                        {
+                            "menuId": "1000002",
+                            "menuName": "拖拽",
+                            "menuType": 1,
+                            "menuUri": "/drag",
+                            "icon": "",
+                            "component": "/hooks/drag/index",
+                            "menuCode": "",
+                            "hidden": 0,
+                            "childMenuList": []
+                        }
+                    ]
+                },
             ]
             const menu = getRouteList(data)
             const routes = [

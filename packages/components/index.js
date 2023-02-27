@@ -1,11 +1,12 @@
 
-const modules = import.meta.glob('./**/index.js')
+const modules = import.meta.glob('./**/index.js', { eager: true })
 
 export default {
     install: (app) => {
         for (const path in modules) {
-            modules[path]().then((mod) => {
-                app.component(mod.default.name, mod.default)
+            const componentList = modules[path].default
+            componentList.forEach(component => {
+                app.component(component.name, component)
             })
         }
 
