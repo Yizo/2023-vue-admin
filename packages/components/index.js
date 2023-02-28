@@ -1,6 +1,8 @@
 
 const modules = import.meta.glob('./**/index.js', { eager: true })
 
+export * from './gm-form'
+
 export default {
     install: (app) => {
         for (const path in modules) {
