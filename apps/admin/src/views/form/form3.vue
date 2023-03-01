@@ -1,11 +1,14 @@
 <template>
   <div class="page-main">
     <h1 class="m-16">动态显示，动态禁用，动态验证</h1>
-    <gm-form :label-col="{ style: {width: '80px'} }" layout="horizontal" :schemas="schemas" :rules="rules" ref="formRef"></gm-form>
-    <div class="mt-16">
-      <a-button @click="resetForm">重置表单</a-button>
-      <a-button html-type="submit" @click="validateForm">验证表单</a-button>
-    </div>
+    <gm-form :label-col="{ style: {width: '80px'} }" layout="horizontal" :schemas="schemas" :rules="rules" ref="formRef">
+      <template #search>
+        <div class="mt-16">
+          <a-button @click="resetForm">重置表单</a-button>
+          <a-button html-type="submit" @click="validateForm">验证表单</a-button>
+        </div>
+      </template>
+    </gm-form>
   </div>
 </template>
 

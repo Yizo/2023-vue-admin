@@ -1,11 +1,7 @@
 <template>
   <div>
     <h1 class="m-16">基本的使用</h1>
-     <gm-form layout="inline" :schemas="schemas" :rules="rules" ref="formRef"></gm-form>
-    <div class="mt-16">
-      <a-button @click="resetForm">重置表单</a-button>
-      <a-button html-type="submit" @click="validateForm">验证表单</a-button>
-    </div>
+     <gm-form layout="inline" :schemas="schemas" :rules="rules" ref="formRef" :search="true"></gm-form>
   </div>
 </template>
 
@@ -88,14 +84,6 @@ const schemas = ref([
 ])
 
 const formRef = ref(null) as Ref<FormActionType>
-
-const resetForm = () => {
-  formRef.value.resetFields()
-}
-
-const validateForm = () => {
-  formRef.value.validate()
-}
 
 onMounted(() => {
   setTimeout(() => {

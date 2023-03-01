@@ -14,6 +14,22 @@
       :actions="formActions"
       :rules="rules && rules[schema.field] ? rules[schema.field] : []"
   ></item>
+  <a-form-item>
+    <slot name="search" :actions="formActions" :model="formModel">
+      <template v-if="attrs.search">
+        <a-button @click="formActions.resetFields">
+          <template #icon>
+            <sync-outlined />
+          </template>
+          重置</a-button>
+        <a-button @click="submit" class="ml-16" type="primary">
+          <template #icon>
+            <search-outlined />
+          </template>
+          查询</a-button>
+      </template>
+    </slot>
+  </a-form-item>
 </a-form>
 </template>
 
@@ -27,6 +43,7 @@ export default {
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 import {ref, defineProps, useAttrs, useSlots, defineEmits, defineExpose, onBeforeMount, unref} from "vue";
+import { SearchOutlined, SyncOutlined } from '@ant-design/icons-vue'
 import { FormSchemaProps } from '../types/Form'
 import { RuleItem } from '../types/Rule'
 import {formEvent} from '../hook/form'
@@ -69,35 +86,35 @@ const formActions = {
   },
   resetFields: (nameList = []) => {
     if(nameList.length) {
-      formRef.value?.resetFields(nameList);
+      formRef.value.resetFields(nameList);
     } else {
-      formRef.value?.resetFields();
+      formRef.value.resetFields();
     }
   },
   validate(nameList = []): Promise<any> {
     formActions.clearValidate()
     if(nameList.length) {
-      return formRef.value?.validate(nameList);
+      return formRef.value.validate(nameList);
     } else {
-      return formRef.value?.validate();
+      return formRef.value.validate();
     }
   },
   validateFields(nameList = []): Promise<any> {
     formActions.clearValidate()
     if(nameList.length) {
-      return formRef.value?.validateFields(nameList);
+      return formRef.value.validateFields(nameList);
     } else {
-      return formRef.value?.validateFields();
+      return formRef.value.validateFields();
     }
   },
   scrollToField(name: string, options?: any[]) {
-    formRef.value?.scrollToField(name, options);
+    formRef.value.scrollToField(name, options);
   },
   clearValidate(nameList = []) {
     if(nameList.length) {
-      formRef.value?.clearValidate(nameList);
+      formRef.value.clearValidate(nameList);
     } else {
-      formRef.value?.clearValidate();
+      formRef.value.clearValidate();
     }
   }
 }
@@ -112,6 +129,12 @@ function initSchemas() {
   formModel.value = {
     ...data
   }
+}
+
+function submit(){
+  formActions.validate().then(res=>{
+    emits('submit', res)
+  })
 }
 
 onBeforeMount(initSchemas)
