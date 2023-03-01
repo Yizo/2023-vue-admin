@@ -18,6 +18,9 @@ export function isArray(val: any): val is Record<any, any> {
     return val !== null && is(val, 'Array');
 }
 
+export function isBoolean(val: any): val is Record<any, any> {
+    return val !== null && is(val, 'Boolean');
+}
 
 /**
  * 返回min-max 之间的 n

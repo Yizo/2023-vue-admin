@@ -1,4 +1,4 @@
-import { Button, Modal, Menu, MenuItem, SubMenu, Form, FormItem, Input, Select, SelectOption ,SelectOptGroup, Radio, RadioGroup, RadioButton, Switch, Checkbox, CheckboxGroup, DatePicker } from 'ant-design-vue'
+import { Button, Modal, Menu, MenuItem, SubMenu, Form, FormItem, Input, Select, SelectOption ,SelectOptGroup, Radio, RadioGroup, RadioButton, Switch, Checkbox, CheckboxGroup, DatePicker, RangePicker } from 'ant-design-vue'
 
 export default {
     install: (app) => {
@@ -20,5 +20,6 @@ export default {
         app.component(Checkbox.name, Checkbox)
         app.component(CheckboxGroup.name, CheckboxGroup)
         app.component(DatePicker.name, DatePicker)
+        app.component(RangePicker.name, RangePicker)
     }
 }

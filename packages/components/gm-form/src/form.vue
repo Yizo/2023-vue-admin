@@ -1,25 +1,19 @@
 <template>
-<a-form ref="formRef" :model="formModel" v-bind="$attrs"
-        :rules="rules"
+<a-form ref="formRef" :model="formModel" v-bind="attrs"
         @submit="handleSubmit"
         @finish="handleFinish"
         @finishFailed="handleFinishFailed"
         @validate="handleFieldValidate"
 >
-  <a-form-item
+  <item
       v-for="schema in schemas"
-      :label="schema.label"
-      :name="schema.field"
-      v-bind="schema.itemProps"
-      :key="schema.field">
-      <form-item
-          :slot="slots[schema.field] ? slots[schema.field] : null"
-          :schema="schema"
-          :model="formModel"
-          :actions="formActions"
-          :field="schema.field"
-      ></form-item>
-  </a-form-item>
+      :key="schema.field"
+      :slot="slots[schema.field] ? slots[schema.field] : null"
+      :schema="schema"
+      :model="formModel"
+      :actions="formActions"
+      :rules="rules && rules[schema.field]"
+  ></item>
 </a-form>
 </template>
 
@@ -36,8 +30,7 @@ import {ref, defineProps, useAttrs, useSlots, defineEmits, defineExpose, onBefor
 import { FormSchemaProps } from '../types/Form'
 import { RuleItem } from '../types/Rule'
 import {formEvent} from '../hook/form'
-import formItem from './form-item'
-import form from "./form.vue";
+import Item from './form-item'
 
 const attrs = useAttrs();
 const slots = useSlots();

@@ -1,7 +1,7 @@
 import {unref} from "vue";
 
 export interface RenderCallbackParams {
-  schemas: FormSchemaProps[];
+  schema: FormSchemaProps;
   ations: FormActionType;
   model: { [key: string]: any };
   field: string
@@ -12,11 +12,11 @@ export interface FormSchemaProps {
   label: string;
   slot?: string;
   // form-item属性
-  itemProps: { [key: string]: any };
+  itemProps: { [key: string]: any } | ((renderCallbackParams: RenderCallbackParams) => { [key: string]: any });
   // antd-vue 表单组件，如a-input, a-select
   component?: string,
   // form-item 下的组件属性
-  componentProps?: { [key: string]: any };
+  componentProps?: { [key: string]: any } | ((renderCallbackParams: RenderCallbackParams) => { [key: string]: any });
   // 表单项的key
   value?: string | number | any[] | boolean; // 有代表着初始值
   // 动态判断是否显示

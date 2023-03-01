@@ -1,4 +1,4 @@
-import { Input, Select, SelectOption ,SelectOptGroup, Radio, RadioGroup, RadioButton, Switch, Checkbox, CheckboxGroup, DatePicker, Slider } from 'ant-design-vue'
+import { Input, Select, SelectOption ,SelectOptGroup, Radio, RadioGroup, RadioButton, Switch, Checkbox, CheckboxGroup, DatePicker, RangePicker, Slider } from 'ant-design-vue'
 
 
 const componentMap = {
@@ -12,7 +12,8 @@ const componentMap = {
     'a-switch': Switch,
     'a-checkbox': Checkbox,
     'a-checkbox-group': CheckboxGroup,
-    'a-datepicker': DatePicker,
+    'a-date-picker': DatePicker,
+    'a-range-picker': RangePicker,
     'a-slider': Slider,
 }
 
