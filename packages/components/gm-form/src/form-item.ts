@@ -6,7 +6,7 @@ import componentMap from './componentMap'
 import type { RuleItem } from '../types/Rule'
 import type { RenderCallbackParams, FormActionType } from '../types/Form'
 // @ts-ignore
-import { isFunction, isBoolean } from '@gm/utils'
+import { isFunction, isBoolean, isEmpty } from '@gm/utils'
 
 
 const componentPublicProps = {
@@ -66,7 +66,7 @@ function formItem(props: any, content: any){
     }
     function getEventValue(e: any){
         let value = undefined
-        if(e === undefined) {
+        if(isEmpty(e)) {
             value = undefined
         } else if(isBoolean(e)){
             value = e

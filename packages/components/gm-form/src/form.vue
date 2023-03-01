@@ -76,16 +76,16 @@ const formActions = {
   },
   validate(nameList = []): Promise<any> {
     if(nameList.length) {
-      formRef.value?.validate(nameList);
+      return formRef.value?.validate(nameList);
     } else {
-      formRef.value?.validate();
+      return formRef.value?.validate();
     }
   },
   validateFields(nameList = []): Promise<any> {
     if(nameList.length) {
-      formRef.value?.validateFields(nameList);
+      return formRef.value?.validateFields(nameList);
     } else {
-      formRef.value?.validateFields();
+      return formRef.value?.validateFields();
     }
   },
   scrollToField(name: string, options?: any[]) {

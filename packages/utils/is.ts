@@ -22,6 +22,20 @@ export function isBoolean(val: any): val is Record<any, any> {
     return val !== null && is(val, 'Boolean');
 }
 
+export function isEmpty(val: any): boolean {
+    let valid = false
+    if(val === null) {
+        valid = true
+    }
+    if(val === undefined) {
+        valid = true
+    }
+    if(isNaN(val) && is(val, 'Number')) {
+        valid = true
+    }
+    return valid
+}
+
 /**
  * 返回min-max 之间的 n
  * @param {number} n 中间值

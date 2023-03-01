@@ -66,8 +66,14 @@ const schemas = ref([
     component: 'a-select',
     componentProps: {
       options: [{
-        label: '北京',
-        value: 'beijing'
+        label: '126',
+        value: '126'
+      }, {
+        label: 'qq',
+        value: 'qq'
+      },{
+        label: 'gmail',
+        value: 'gmail'
       }],
       onChange: (...args: any[]) => {
         console.log(args)
@@ -79,29 +85,34 @@ const schemas = ref([
     label: '地址',
     slot: 'address',
     component: 'a-checkbox-group',
-    componentProps: {
-      style: {
-        display: 'flex'
-      },
-      options: [{
-        label: '南京',
-        value: 'nanjing'
-      },{
-        label: '上海',
-        value: 'shanghai'
-      },{
-        label: '上海',
-        value: 'shenzhen'
-      },{
-        label: '北京',
-        value: 'beijing'
-      },{
-        label: '沈阳',
-        value: 'shengyang'
-      }],
-      onChange: (...args: any[]) => {
-        console.log(args)
-      },
+    componentProps: ({ field, model, actions, schema }: RenderCallbackParams) => {
+      return {
+        style: {
+          display: 'flex'
+        },
+        options: [{
+          label: '南京',
+          value: 'nanjing'
+        },{
+          label: '上海',
+          value: 'shanghai',
+          disabled: model['email'] === '126'
+        },{
+          label: '深圳',
+          value: 'shenzhen',
+          disabled: model['email'] === 'qq'
+        },{
+          label: '北京',
+          value: 'beijing',
+          disabled: model['email'] === 'gmail'
+        },{
+          label: '沈阳',
+          value: 'shengyang'
+        }],
+        onChange: (...args: any[]) => {
+          console.log(args)
+        },
+      }
     }
   },
   {
@@ -170,7 +181,9 @@ const resetForm = () => {
 }
 
 const validateForm = () => {
-  formRef.value.validate()
+  formRef.value.validate().then((values: {[key: string]: any}) => {
+    console.log(values)
+  })
 }
 </script>
 
