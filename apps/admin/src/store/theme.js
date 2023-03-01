@@ -88,7 +88,7 @@ const themeStore = defineStore({
                     "childMenuList": [
                         {
                             "menuId": "200002",
-                            "menuName": "表单类型1",
+                            "menuName": "基本用法",
                             "menuType": 1,
                             "menuUri": "/form",
                             "icon": "",
@@ -99,7 +99,7 @@ const themeStore = defineStore({
                         },
                         {
                             "menuId": "200003",
-                            "menuName": "表单类型2",
+                            "menuName": "使用插槽",
                             "menuType": 1,
                             "menuUri": "/form/form2",
                             "icon": "",
@@ -110,7 +110,7 @@ const themeStore = defineStore({
                         },
                         {
                             "menuId": "200004",
-                            "menuName": "表单类型3",
+                            "menuName": "动态表单",
                             "menuType": 1,
                             "menuUri": "/form/form3",
                             "icon": "",

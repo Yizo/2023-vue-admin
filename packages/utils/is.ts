@@ -22,6 +22,10 @@ export function isBoolean(val: any): val is Record<any, any> {
     return val !== null && is(val, 'Boolean');
 }
 
+export function isPromise(val: any): boolean {
+    return val !== null && is(val, 'Promise')
+}
+
 export function isEmpty(val: any): boolean {
     let valid = false
     if(val === null) {

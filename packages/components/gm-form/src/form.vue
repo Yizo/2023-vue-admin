@@ -12,7 +12,7 @@
       :schema="schema"
       :model="formModel"
       :actions="formActions"
-      :rules="rules && rules[schema.field]"
+      :rules="rules && rules[schema.field] ? rules[schema.field] : []"
   ></item>
 </a-form>
 </template>
@@ -75,6 +75,7 @@ const formActions = {
     }
   },
   validate(nameList = []): Promise<any> {
+    formActions.clearValidate()
     if(nameList.length) {
       return formRef.value?.validate(nameList);
     } else {
@@ -82,6 +83,7 @@ const formActions = {
     }
   },
   validateFields(nameList = []): Promise<any> {
+    formActions.clearValidate()
     if(nameList.length) {
       return formRef.value?.validateFields(nameList);
     } else {

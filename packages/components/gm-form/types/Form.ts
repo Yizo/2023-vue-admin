@@ -7,24 +7,26 @@ export interface RenderCallbackParams {
   field: string
 }
 
+export type FunctionRenderCallbackParams<T = { [key: string]: any }> = T | ((renderCallbackParams: RenderCallbackParams) => T);
+
 export interface FormSchemaProps {
   field: string;
   label: string;
   slot?: string;
   // form-item属性
-  itemProps: { [key: string]: any } | ((renderCallbackParams: RenderCallbackParams) => { [key: string]: any });
+  itemProps: FunctionRenderCallbackParams;
   // antd-vue 表单组件，如a-input, a-select
   component?: string,
   // form-item 下的组件属性
-  componentProps?: { [key: string]: any } | ((renderCallbackParams: RenderCallbackParams) => { [key: string]: any });
+  componentProps?: FunctionRenderCallbackParams;
   // 表单项的key
   value?: string | number | any[] | boolean; // 有代表着初始值
   // 动态判断是否显示
-  ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
+  ifShow?: FunctionRenderCallbackParams<boolean>;
   // 动态判断是否禁用
-  dynamicDisabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
+  dynamicDisabled?: FunctionRenderCallbackParams<boolean>;
   // 动态判断校验规则
-  dynamicRules?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
+  dynamicRules?: FunctionRenderCallbackParams<boolean>;
 }
 
 export interface FormValidateFn {

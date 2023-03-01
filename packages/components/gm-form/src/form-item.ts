@@ -4,13 +4,25 @@ import dayjs from 'dayjs'
 import { FormItem } from 'ant-design-vue'
 import componentMap from './componentMap'
 import type { RuleItem } from '../types/Rule'
-import type { RenderCallbackParams, FormActionType } from '../types/Form'
+import type { RenderCallbackParams, FormActionType, FunctionRenderCallbackParams } from '../types/Form'
 // @ts-ignore
-import { isFunction, isBoolean, isEmpty } from '@gm/utils'
+import { isFunction, isBoolean, isEmpty, isArray, isPromise } from '@gm/utils'
 
 
 const componentPublicProps = {
     allowClear: true
+}
+function getPropsFactory<T>(props: FunctionRenderCallbackParams<T>, renderCallbackParams: RenderCallbackParams): T {
+    if(isFunction(props)){
+        try{
+            // @ts-ignore
+            return props(renderCallbackParams)
+        }catch(err: any){
+            throw new Error(err)
+        }
+    } else {
+        return props as T
+    }
 }
 
 function getDisabled(props: {[key: string]: any}, content: any, renderCallbackParams: RenderCallbackParams) {
@@ -27,16 +39,26 @@ function getDisabled(props: {[key: string]: any}, content: any, renderCallbackPa
     return disabled
 }
 
+function getRules(props: {[key: string]: any}, content: any, renderCallbackParams: RenderCallbackParams) {
+    let rules = []
+    const { schema } = props
+    const { dynamicRules } = schema
+    if(dynamicRules) {
+        if(isFunction(dynamicRules)) {
+            rules = dynamicRules(renderCallbackParams).filter((rule: any) => rule)
+        } else if(isArray(dynamicRules)) {
+            rules = dynamicRules.filter((rule: any) => rule)
+        }
+    } else {
+        rules = props.rules
+    }
+    return rules
+}
+
 function formItem(props: any, content: any){
     const { attrs } = content
     const { schema, slot, model, actions } = props
-    const { field, label, itemProps, component, componentProps, ifShow, dynamicDisabled, dynamicRules} = schema
-    const rules = props.rules
-
-    const isCheck = component && ['a-switch', 'a-checkbox'].includes(component);
-    const isDate = component && ['a-date-picker', 'a-range-picker'].includes(component);
-    const eventList: string[] = []
-
+    const { field, label, itemProps, component, componentProps, ifShow } = schema
     const renderCallbackParams: RenderCallbackParams = {
         field,
         schema,
@@ -44,19 +66,22 @@ function formItem(props: any, content: any){
         // @ts-ignore
         actions
     }
+    const isCheck = component && ['a-switch', 'a-checkbox'].includes(component);
+    const isDate = component && ['a-date-picker', 'a-range-picker'].includes(component);
+    const eventList: string[] = []
+    let rules = [...getRules(props, content, renderCallbackParams)]
 
     componentProps && Object.keys(componentProps).forEach(key=>{
         if(/^on[A-Z]+[a-z]+$/.test(key)){
             eventList.push(key)
         }
     })
-
     // form-item的props
     const formItemProps = {
         label,
         name: field,
         rules,
-        ...(isFunction(itemProps) ? itemProps(renderCallbackParams) : itemProps),
+        ...getPropsFactory(itemProps, renderCallbackParams)
     }
     // form-item下的表单组件的props
     const childProps = {
@@ -92,7 +117,6 @@ function formItem(props: any, content: any){
         childProps.valueFormat = 'YYYY-MM-DD'
     }
 
-    // ifShow
     if(ifShow !== undefined && (ifShow === false || ifShow(renderCallbackParams) === false)){
         return null
     }
@@ -100,7 +124,7 @@ function formItem(props: any, content: any){
 
     Object.assign(childProps, {
         disabled: getDisabled(props, content, renderCallbackParams),
-        ...(isFunction(componentProps) ? componentProps(renderCallbackParams) : componentProps),
+        ...getPropsFactory(componentProps, renderCallbackParams),
         onChange: (e: any) => {
             const value = getEventValue(e)
             actions.setFieldValue(field, value)

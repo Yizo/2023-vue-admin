@@ -22,7 +22,10 @@ import { FormActionType, RenderCallbackParams } from '@gm/components'
 const rules = ref({
   name: [{
     required: true,
-    message: 'name不能为空'
+    message: 'name不能为空',
+  }, {
+    max: 20,
+    message: '长度必须小于20'
   }],
   email: [{
     required: true,
@@ -160,9 +163,8 @@ const schemas = ref([
   {
     field: 'pay',
     label: '支付方式',
-    component: 'a-radio-group',
+    component: 'a-checkbox-group',
     componentProps: {
-      disabled: true,
       options: [{
         label: '支付宝',
         value: 'aliPay'
@@ -170,6 +172,16 @@ const schemas = ref([
         label: '微信',
         value: 'wechat'
       }]
+    },
+    dynamicRules: ({ field, model, actions, schema }: RenderCallbackParams) => {
+      if(model['age'] && parseInt(model['age']) > 18) {
+        return []
+      } else {
+        return [{
+          required: true,
+          message: '支付方式不能为空'
+        }]
+      }
     }
   }
 ])
