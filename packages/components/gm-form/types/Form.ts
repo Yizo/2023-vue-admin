@@ -51,6 +51,7 @@ export interface FormActionType {
   validateFields: (nameList?: any[]) => Promise<any>;
   scrollToField: (name: string, options?: any[]) => void;
   clearValidate: (nameList?: any[]) => void;
+  getFormModel: () => { [key: string]: any };
 }
 
 export type RegisterFn = (formInstance: FormActionType) => void;

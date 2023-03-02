@@ -25,7 +25,7 @@ function getPropsFactory<T>(props: FunctionRenderCallbackParams<T>, renderCallba
     }
 }
 
-function getDisabled(props: {[key: string]: any}, content: any, renderCallbackParams: RenderCallbackParams) {
+function getDisabled(props: Record<string, any>, content: any, renderCallbackParams: RenderCallbackParams) {
     const { attrs } = content
     const {schema: { dynamicDisabled }} = props
     let disabled = false
@@ -39,7 +39,7 @@ function getDisabled(props: {[key: string]: any}, content: any, renderCallbackPa
     return disabled
 }
 
-function getRules(props: {[key: string]: any}, content: any, renderCallbackParams: RenderCallbackParams) {
+function getRules(props: Record<string, any>, content: any, renderCallbackParams: RenderCallbackParams) {
     let rules = []
     const { schema } = props
     const { dynamicRules } = schema

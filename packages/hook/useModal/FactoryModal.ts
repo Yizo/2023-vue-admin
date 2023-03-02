@@ -20,19 +20,17 @@ function useModal(props: Props) {
     } as Props
 
     const node = h(gmModal, {
-        props: {
-            _functional: true,
-            visible: true,
-            destroyOnClose: true,
-            maskClosable: false,
-            type: 'info',
-            closable: true,
-            cancelText: '取消',
-            okText: '确定',
-            okType: 'primary',
-            title: '',
-            ...options,
-        },
+        _functional: true,
+        visible: true,
+        destroyOnClose: true,
+        mask: true,
+        type: 'info',
+        closable: true,
+        cancelText: '取消',
+        okText: '确定',
+        okType: 'primary',
+        title: '',
+        ...options,
     })
     const open = () => {
         render(node, document.body)

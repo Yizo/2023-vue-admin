@@ -32,10 +32,15 @@
         </a-tooltip>
       </div>
     </template>
-    <template #footer v-if="showFooter">
-      <a-button v-bind="btn.props" :loading="loadingIndex === index && loading" :key="index" v-for="(btn, index) in modelProps.btns" @click="()=>handleBtnClick(index, btn)">
-        {{ btn.text }}
-      </a-button>
+    <template #footer v-if="modelProps.footer !== null">
+      <template v-if="slots['footer']">
+        <slot name="footer"></slot>
+      </template>
+      <template v-else-if="modelProps.btns && modelProps.btns.length">
+        <a-button v-bind="btn.props" :loading="loadingIndex === index && loading" :key="index" v-for="(btn, index) in modelProps.btns" @click="()=>handleBtnClick(index, btn)">
+          {{ btn.text }}
+        </a-button>
+      </template>
     </template>
     <div class="content">
       <template v-if="isFunctional">
@@ -53,7 +58,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import { ref, useSlots, useAttrs, defineProps, PropType, computed, h } from 'vue'
+import { ref, useSlots, useAttrs, defineProps, PropType, computed, defineEmits } from 'vue'
 import { InfoCircleOutlined, CloseCircleOutlined, CheckCircleOutlined, CloseOutlined, FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons-vue'
 import renderContent from './renderContent'
 import type { ModalProps as Props } from '../types'
@@ -109,25 +114,20 @@ const props = defineProps({
     type: Boolean as PropType<Props['visible']>,
     default: false
   },
-  'onUpdate:visible': Object as PropType<Props['onUpdate:visible']>,
   onChange: Function as PropType<Props['onChange']>
 })
-const attributes = useAttrs()
+
+const emits = defineEmits(['update:visible'])
+const attrs = useAttrs()
 const slots = useSlots()
 const isFull = ref(false)
 const visible = ref(props.visible)
-const isFunctional = computed(() => !!(attributes.props && attributes.props._functional))
-/**
- * 如果是函数式组件，则取attributes.props
- * 否则是普通组件, 以组件props为主, attrs为辅进行属性合并
- * */
+const isFunctional = computed(() => props._functional === true)
+
 const modelProps = computed(()=>{
   // 原始的弹窗以title属性为主，我这边以slot为主，所以要删除title属性
-  const data = isFunctional.value ? {
-    ...attributes.props,
-    _title: attributes.props.title,
-  } : {
-    ...attributes.attrs,
+  const data = {
+    ...attrs,
     ...props,
     _title: props.title
   }
@@ -135,10 +135,9 @@ const modelProps = computed(()=>{
   return data
 })
 
-const {loading, loadingIndex, closeLoading, openLoading} = useLoading()
+console.log(modelProps)
 
-// 是否显示footer
-const showFooter = computed(() => modelProps.value.footer !== null)
+const {loading, loadingIndex, closeLoading, openLoading} = useLoading()
 
 function handleIcnClick(e: PointerEvent) {
   isFull.value =!isFull.value
@@ -177,7 +176,7 @@ function handleBtnClick(index, btn) {
 function onCancel(){
   if(loading.value && loadingIndex.value !== -1) return
   closeLoading()
-  visible.value = false
+  emits('update:visible', false)
   if(isFunctional.value) {
     modelProps.value.destroy()
   }

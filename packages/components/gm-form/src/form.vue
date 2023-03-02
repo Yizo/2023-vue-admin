@@ -1,34 +1,23 @@
 <template>
-<a-form ref="formRef" :model="formModel" v-bind="attrs"
+<a-form ref="formRef" :model="formModel" v-bind="_attrs"
         @submit="handleSubmit"
         @finish="handleFinish"
         @finishFailed="handleFinishFailed"
         @validate="handleFieldValidate"
 >
   <item
-      v-for="schema in schemas"
+      v-for="schema in _schemas"
       :key="schema.field"
       :slot="slots[schema.field] ? slots[schema.field] : null"
       :schema="schema"
       :model="formModel"
       :actions="formActions"
-      :rules="rules && rules[schema.field] ? rules[schema.field] : []"
+      :rules="_rules && _rules[schema.field] ? _rules[schema.field] : []"
   ></item>
   <a-form-item>
-    <slot name="search" :actions="formActions" :model="formModel">
-      <template v-if="attrs.search">
-        <a-button @click="formActions.resetFields">
-          <template #icon>
-            <sync-outlined />
-          </template>
-          重置</a-button>
-        <a-button @click="submit" class="ml-16" type="primary">
-          <template #icon>
-            <search-outlined />
-          </template>
-          查询</a-button>
-      </template>
-    </slot>
+  <a-form-item v-if="attrs.search !== undefined">
+    <gm-form-search :onSubmit="formActions.validate" :onRest="formActions.resetFields" :model="formModel"></gm-form-search>
+  </a-form-item>
   </a-form-item>
 </a-form>
 </template>
@@ -42,21 +31,17 @@ export default {
 
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import {ref, defineProps, useAttrs, useSlots, defineEmits, defineExpose, onBeforeMount, unref} from "vue";
-import { SearchOutlined, SyncOutlined } from '@ant-design/icons-vue'
+import {ref, defineProps, useAttrs, useSlots, defineEmits, defineExpose, onBeforeMount, unref, watch } from "vue";
 import { FormSchemaProps } from '../types/Form'
 import { RuleItem } from '../types/Rule'
 import {formEvent} from '../hook/form'
 import Item from './form-item'
+import gmFormFooter from './form-search.vue'
+import GmFormSearch from "./form-search.vue";
 
 const attrs = useAttrs();
 const slots = useSlots();
 const emits = defineEmits(['submit', 'finish', 'finishFailed', 'validate']);
-
-console.group('gm-form')
-
-console.log('attrs', attrs)
-console.log('slots', slots)
 
 const props = defineProps({
   schemas: {
@@ -71,6 +56,9 @@ const props = defineProps({
 
 const formRef = ref(null);
 const formModel = ref({})
+const _schemas = ref([]);
+const _rules = ref([]);
+const _attrs = ref({});
 
 const { handleFinish, handleFieldValidate, handleSubmit, handleFinishFailed } = formEvent(emits)
 const formActions = {
@@ -119,7 +107,7 @@ const formActions = {
   }
 }
 
-function initSchemas() {
+function initSchemas(props) {
   const data = {}
   if(props.schemas) {
     props.schemas.forEach(schema => {
@@ -137,13 +125,21 @@ function submit(){
   })
 }
 
-onBeforeMount(initSchemas)
+onBeforeMount(()=>initSchemas(props))
 
 defineExpose({
   ...formActions,
 })
 
-console.groupEnd()
+watch(() => props, (newProps: Record<string, any>) => {
+  initSchemas(newProps)
+  _rules.value = newProps.rules
+  _schemas.value = newProps.schemas
+}, {deep: true, immediate: true})
+
+watch(() => attrs, (newProps: Record<string, any>) => {
+  _attrs.value = newProps
+}, {deep: true, immediate: true})
 
 </script>
 

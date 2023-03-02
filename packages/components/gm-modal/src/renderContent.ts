@@ -4,13 +4,10 @@ import { createVNode } from "vue";
 import { isFunction, isString } from '@gm/utils'
 function renderContent(props: { [key: string]: any }): VNode {
     const { content } = props
-    console.log(props)
     if(isFunction(content)) {
-        console.log(1)
        return content(createVNode)
     } else {
-        console.log(3)
-        return createVNode(content)
+        return createVNode('div', null, content)
     }
 }
 

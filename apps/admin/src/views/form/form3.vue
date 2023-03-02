@@ -196,7 +196,7 @@ const resetForm = () => {
 }
 
 const validateForm = () => {
-  formRef.value.validate().then((values: {[key: string]: any}) => {
+  formRef.value.validate().then((values: Record<string, any>) => {
     console.log(values)
   })
 }
