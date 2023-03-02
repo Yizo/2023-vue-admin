@@ -50,7 +50,7 @@ const btns = [{
     type: 'primary'
   },
 
-  onclick: () => {
+  onClick: () => {
     const fn = (timeout: number) => {
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -95,7 +95,7 @@ function open6() {
       type: 'primary'
     },
 
-    onclick: () => {
+    onClick: () => {
       console.log('自动关闭')
     }
 
@@ -111,7 +111,7 @@ function open7() {
       type: 'primary'
     },
 
-    onclick: () => {
+    onClick: () => {
       console.log('不关闭')
       return true
     }
@@ -128,7 +128,7 @@ function open8() {
       type: 'primary'
     },
 
-    onclick: () => {
+    onClick: () => {
       const fn = (timeout: number) => {
         return new Promise((resolve) => {
           setTimeout(() => {
@@ -153,7 +153,7 @@ function open9() {
     props: {
       type: 'primary'
     },
-    onclick: () => {
+    onClick: () => {
       const fn = (timeout: number) => {
         return new Promise((resolve) => {
           setTimeout(() => {
@@ -179,7 +179,7 @@ function open10() {
       type: 'primary'
     },
 
-    onclick: (cancel) => {
+    onClick: (cancel) => {
       const fn = (timeout: number) => {
         return new Promise((resolve) => {
           setTimeout(() => {

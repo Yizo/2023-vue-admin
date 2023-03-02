@@ -7,6 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@gm/components": "workspace:^1.0.0",
     "@gm/utils": "workspace:^1.0.0"
   }
 }

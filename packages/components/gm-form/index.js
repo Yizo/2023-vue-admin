@@ -1,6 +1,10 @@
-import form from './src/form.vue'
+import gmForm from './src/form.vue'
 
 export * from './types/Form'
-export * from './hook/useForm'
+export * from './types/rule'
 
-export default [form]
+export {
+   gmForm
+}
+
+export default [gmForm]

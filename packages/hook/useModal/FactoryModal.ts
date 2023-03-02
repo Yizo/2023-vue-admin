@@ -1,17 +1,58 @@
-import { getBtns, useModal } from './index'
-import type {Props, ModalInstaceReturun} from "./types";
+import {h, render} from 'vue'
+// @ts-ignore
+import type {ModalProps as Props, ModalInstaceReturun, ContentType} from "@gm/components";
+// @ts-ignore
+import { getBtns, gmModal } from '@gm/components'
 
 function factory(props: Props, type?: Props["type"]): ModalInstaceReturun {
-    const btns = (props.btns || [getBtns(props)[1]]) as Props['btns']
+    const btns = getBtns(props)
     const modal = useModal({...props, type, btns })
     modal.open()
     return modal
 }
 
+function useModal(props: Props) {
+    const btns = getBtns(props)
+    const options = {
+        ...props,
+        btns,
+        destroy: () => close()
+    } as Props
+
+    const node = h(gmModal, {
+        props: {
+            _functional: true,
+            visible: true,
+            destroyOnClose: true,
+            maskClosable: false,
+            type: 'info',
+            closable: true,
+            cancelText: '取消',
+            okText: '确定',
+            okType: 'primary',
+            title: '',
+            ...options,
+        },
+    })
+    const open = () => {
+        render(node, document.body)
+    }
+
+    const close = () => {
+        render(null, document.body)
+    }
+
+    return {
+        open,
+        close
+    }
+
+}
+
 /**
  * 错误消息弹窗
  * */
-function errorModal(title: string|Props, content?: string, props?: Props): ModalInstaceReturun{
+function errorModal(title: string|Props, content?: ContentType, props?: Props): ModalInstaceReturun{
     if(typeof title === "string"){
         return factory({
             title,
@@ -26,7 +67,7 @@ function errorModal(title: string|Props, content?: string, props?: Props): Modal
 /**
  * 成功消息弹窗
  * */
-function successModal(title: string|Props, content?: string, props?: Props): ModalInstaceReturun{
+function successModal(title: string|Props, content?: ContentType, props?: Props): ModalInstaceReturun{
     if(typeof title === "string") {
         return factory({
             title,
@@ -41,7 +82,7 @@ function successModal(title: string|Props, content?: string, props?: Props): Mod
 /**
  * 警告弹窗
  * */
-function warningModal(title: string | Props, content?: string, props?: Props): ModalInstaceReturun{
+function warningModal(title: string | Props, content?: ContentType, props?: Props): ModalInstaceReturun{
     if(typeof title === 'string'){
         return factory({
             title,
@@ -56,7 +97,7 @@ function warningModal(title: string | Props, content?: string, props?: Props): M
 /**
  * 普通弹窗
  * */
-function infoModal(title: string|Props, content?: string, props?: Props): ModalInstaceReturun {
+function infoModal(title: string|Props, content?: ContentType, props?: Props): ModalInstaceReturun {
     if(typeof title === 'string'){
         return factory({
             title,

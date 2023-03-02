@@ -152,8 +152,10 @@ importers:
 
   packages/hook:
     specifiers:
+      '@gm/components': workspace:^1.0.0
       '@gm/utils': workspace:^1.0.0
     dependencies:
+      '@gm/components': link:../components
       '@gm/utils': link:../utils
 
   packages/layout:

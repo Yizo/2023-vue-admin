@@ -105,7 +105,7 @@ const transform: AxiosTransform = {
             content: res.data.message,
             btns: [{
               text: '取消',
-              onclick:(cancel: any)=>{
+              onClick:(cancel: any)=>{
                 cancel();
                 responseModalEvent && responseModalEvent();
               }
@@ -151,7 +151,7 @@ const transform: AxiosTransform = {
           content: timeoutMsg,
           btns: [{
             text: '取消',
-            onclick:(cancel: any)=>{
+            onClick:(cancel: any)=>{
               cancel();
               if (
                   code === ResultEnum.TIMEOUT ||
@@ -170,7 +170,7 @@ const transform: AxiosTransform = {
             content: message || httpERRMsg.apiRequestFailed,
             btns: [{
               text: '取消',
-              onclick:(cancel: any)=>{
+              onClick:(cancel: any)=>{
                 cancel();
                 requestOptions?.errorModalEvent && requestOptions.errorModalEvent();
               }

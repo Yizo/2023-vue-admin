@@ -39,7 +39,7 @@
     </template>
     <div class="content">
       <template v-if="isFunctional">
-        <p v-html="modelProps.content"></p>
+        <render-content :content="modelProps.content"></render-content>
       </template>
       <template v-if="!isFunctional">
         <slot></slot>
@@ -47,17 +47,17 @@
     </div>
   </a-modal>
 </template>
-
 <script lang="ts">
 export default {
-  name: 'gmModal',
+  name: 'gmModal'
 }
 </script>
 <script lang="ts" setup>
-import { ref, useSlots, useAttrs, defineProps, PropType, computed } from 'vue'
+import { ref, useSlots, useAttrs, defineProps, PropType, computed, h } from 'vue'
 import { InfoCircleOutlined, CloseCircleOutlined, CheckCircleOutlined, CloseOutlined, FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons-vue'
-import type { Props } from './types'
-import { useLoading } from './index'
+import renderContent from './renderContent'
+import type { ModalProps as Props } from '../types'
+import { useLoading } from '../hook'
 
 const props = defineProps({
   _functional: {
@@ -139,22 +139,20 @@ const {loading, loadingIndex, closeLoading, openLoading} = useLoading()
 
 // 是否显示footer
 const showFooter = computed(() => modelProps.value.footer !== null)
-console.log(slots)
-console.log('props', modelProps.value)
 
 function handleIcnClick(e: PointerEvent) {
   isFull.value =!isFull.value
 }
 
 function handleBtnClick(index, btn) {
-  if(!btn.onclick) {
+  if(!btn.onClick) {
     return onCancel()
   }
   if(loading.value && loadingIndex.value !== -1) return
   try{
     openLoading(index)
     // 返回为真时不关闭弹窗
-    const data = btn.onclick(onCancel)
+    const data = btn.onClick(onCancel)
     if(data instanceof Promise) {
       data.then(res=>{
         closeLoading()
