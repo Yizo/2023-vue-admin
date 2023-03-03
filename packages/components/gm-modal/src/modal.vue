@@ -174,6 +174,7 @@ function handleBtnClick(index, btn) {
 function onCancel(){
   if(loading.value && loadingIndex.value !== -1) return
   closeLoading()
+  isFull.value = false
   emits('update:visible', false)
   if(isFunctional.value) {
     modelProps.value.destroy()

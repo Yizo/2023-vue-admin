@@ -103,7 +103,7 @@ function formItem(props: any, content: any){
         if(component === 'a-date-picker'){
             value = value ? dayjs(value).format(childProps.valueFormat) : undefined
         } else if(component === 'a-range-picker'){
-            value = value ? value.map((v: Date)=>dayjs(v).format(childProps.valueFormat)): []
+            value = value ? value.map((v: Date)=>dayjs(v).format(childProps.valueFormat)): undefined
         }
         return value
     }

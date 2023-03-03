@@ -2,10 +2,9 @@
   <div>
     <a-button @click="addForm">新建表单</a-button>
     <a-button @click="editForm">编辑表单</a-button>
-    <gm-modal-form title="表单弹窗" v-model:visible="visible" :rules="rules" :schemas="schemas" :btns="btns">
+    <gm-modal-form ref="formRef" width="700px" title="表单弹窗" v-model:visible="visible" :rules="rules" :schemas="schemas" :btns="btns">
       <template #tree="{ model }">
-        {{ model }}
-        <input type="text" v-model="model['tree']"/>
+        <a-input type="text" v-model="model['tree']"/>
       </template>
     </gm-modal-form>
   </div>
@@ -17,7 +16,7 @@ export default {
 }
 </script>
 <script lang="ts"  setup>
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import type { RenderCallbackParams, FormActionType } from '@gm/components'
 import { useVisible } from '@gm/hook'
 const { visible, open, close } = useVisible()
@@ -50,6 +49,7 @@ const rules = ref({
     message: '时间段不能为空'
   }]
 })
+const formRef = ref(null)
 const schemas = ref([
   {
     field: 'name',
@@ -70,11 +70,7 @@ const schemas = ref([
       },{
         label: 'gmail',
         value: 'gmail'
-      }],
-      onChange: (value, params) => {
-        console.log(value)
-        console.log(params)
-      },
+      }]
     }
   },
   {
@@ -182,24 +178,27 @@ const schemas = ref([
   }
 ])
 const newFields = schemas.value.map(item => item.value)
-function addForm() {
+console.log('newFields', newFields)
+
+async function addForm() {
+  open()
   schemas.value.forEach((schema, index) => {
     schema['value'] = newFields[index]
   })
-  open()
+  console.log('addForm', newFields)
 }
+
 function editForm(){
   const fields = ['name', 'email', 'nanjing', '30', true, '2023-03-01', undefined, 'aliPay']
   schemas.value.forEach((schema, index) => {
     schema['value'] = fields[index]
   })
   open()
-  console.log(schemas.value.length)
-  schemas.value[7].componentProps.options.push({label: '京东支付', value: 'jdPay'})
 }
 
 const btns = [{
   onClick: (formRef: FormActionType) => {
+    console.log(formRef.getFieldsValue())
     formRef.validate().then((valid: Record<string, any>) => {
       console.log(valid)
     })

@@ -13,7 +13,6 @@ import WujieVue from 'wujie-vue3'
 import { useAttrs } from 'vue'
 
 const attrs = useAttrs()
-console.log(attrs)
 </script>
 
 <style scoped>

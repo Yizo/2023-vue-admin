@@ -16,7 +16,18 @@
   ></item>
   <a-form-item>
   <a-form-item v-if="attrs.search !== undefined">
-    <gm-form-search :onSubmit="formActions.validate" :onRest="formActions.resetFields" :model="formModel"></gm-form-search>
+    <a-button @click="formActions.resetFields">
+      <template #icon>
+        <sync-outlined />
+      </template>
+      {{ $attrs.resetText || '重置' }}
+    </a-button>
+    <a-button @click="formActions.validate" class="ml-16" type="primary">
+      <template #icon>
+        <search-outlined />
+      </template>
+      {{ $attrs.submitText || '查询' }}
+    </a-button>
   </a-form-item>
   </a-form-item>
 </a-form>
@@ -32,12 +43,12 @@ export default {
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 import {ref, defineProps, useAttrs, useSlots, defineEmits, defineExpose, onBeforeMount, unref, watch } from "vue";
+import { SearchOutlined, SyncOutlined } from '@ant-design/icons-vue'
 import { FormSchemaProps } from '../types/Form'
 import { RuleItem } from '../types/Rule'
 import {formEvent} from '../hook/form'
 import Item from './form-item'
-import gmFormFooter from './form-search.vue'
-import GmFormSearch from "./form-search.vue";
+import { isEmpty, isArray } from '@gm/utils'
 
 const attrs = useAttrs();
 const slots = useSlots();
@@ -78,6 +89,15 @@ const formActions = {
     } else {
       formRef.value.resetFields();
     }
+    // 重置dataRange组件时，会出现[undefind]的情况，表单验证不通过，需要手动重置
+    const keys = Object.keys(formModel.value)
+    keys.forEach((key) =>{
+      if(formModel.value[key] && isArray(formModel.value[key])){
+        if(formModel.value[key].filter(item =>!isEmpty(item)).length === 0){
+          formModel.value[key] = undefined
+        }
+      }
+    })
   },
   validate(nameList = []): Promise<any> {
     formActions.clearValidate()
@@ -132,14 +152,12 @@ defineExpose({
 })
 
 watch(() => props, (newProps: Record<string, any>) => {
-  console.log('watch:props', newProps)
   initSchemas(newProps)
   _rules.value = newProps.rules
   _schemas.value = newProps.schemas
 }, {deep: true, immediate: true})
 
 watch(() => attrs, (newProps: Record<string, any>) => {
-  console.log('watch:attrs', newProps)
   _attrs.value = newProps
 }, {deep: true, immediate: true})
 

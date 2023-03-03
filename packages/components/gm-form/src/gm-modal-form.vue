@@ -58,7 +58,7 @@ const modelDefaultProps = {
 
 function close() {
   resetForm()
-  setTimeout(() => emits('update:visible'), 10)
+  emits('update:visible', false)
 }
 
 function resetForm() {
