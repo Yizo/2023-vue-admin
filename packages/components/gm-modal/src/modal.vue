@@ -32,7 +32,7 @@
         </a-tooltip>
       </div>
     </template>
-    <template #footer v-if="modelProps.footer !== null">
+    <template #footer>
       <template v-if="slots['footer']">
         <slot name="footer"></slot>
       </template>
@@ -40,6 +40,9 @@
         <a-button v-bind="btn.props" :loading="loadingIndex === index && loading" :key="index" v-for="(btn, index) in modelProps.btns" @click="()=>handleBtnClick(index, btn)">
           {{ btn.text }}
         </a-button>
+      </template>
+      <template v-else>
+        <a-button @click="onCancel()">{{ modelProps.okText || '确定' }}</a-button>
       </template>
     </template>
     <div class="content">
@@ -188,6 +191,7 @@ function onCancel(){
   .content {
     word-wrap:break-word;
     max-width: 100%;
+    min-height: 50px;
   }
   .close-icon-warp {
     position: relative;

@@ -30,6 +30,7 @@ function useModal(props: Props) {
         okText: '确定',
         okType: 'primary',
         title: '',
+        width: '450px',
         ...options,
     })
     const open = () => {

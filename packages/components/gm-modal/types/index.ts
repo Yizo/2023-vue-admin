@@ -5,7 +5,6 @@ export type ContentType = string | VNode | ((h: typeof createVNode)=>VNode)
 
 /**
  * 比原始的modal新增属性
- * @param {boolean} hideFooter 是否隐藏footer, 默认显示一个取消
  * @param {array} btns footer按钮组
  * */
 export type ModalProps = Partial<AModelProps & {
