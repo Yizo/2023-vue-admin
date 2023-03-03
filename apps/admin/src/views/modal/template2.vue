@@ -2,7 +2,12 @@
   <div>
     <a-button @click="addForm">新建表单</a-button>
     <a-button @click="editForm">编辑表单</a-button>
-      <gm-modal-form title="表单弹窗" v-model:visible="visible" :rules="rules" :schemas="schemas" :btns="btns"/>
+    <gm-modal-form title="表单弹窗" v-model:visible="visible" :rules="rules" :schemas="schemas" :btns="btns">
+      <template #tree="{ model }">
+        {{ model }}
+        <input type="text" v-model="model['tree']"/>
+      </template>
+    </gm-modal-form>
   </div>
 </template>
 
@@ -27,10 +32,6 @@ const rules = ref({
   email: [{
     required: true,
     message: 'email不能为空'
-  }],
-  address: [{
-    required: true,
-    message: '地址不能为空'
   }],
   age: [{
     required: true,
@@ -70,8 +71,9 @@ const schemas = ref([
         label: 'gmail',
         value: 'gmail'
       }],
-      onChange: (...args: any[]) => {
-        console.log(args)
+      onChange: (value, params) => {
+        console.log(value)
+        console.log(params)
       },
     }
   },
@@ -139,7 +141,6 @@ const schemas = ref([
     label: '日期',
     component: 'a-date-picker',
     ifShow: ({ field, model, actions, schema }: RenderCallbackParams) => {
-      console.log('model:field', model)
       return model['switch'] === true
     }
   },
@@ -148,7 +149,6 @@ const schemas = ref([
     label: '时间段',
     component: 'a-range-picker',
     ifShow: ({ field, model, actions, schema }: RenderCallbackParams) => {
-      console.log('model: date-range', model)
       return model['switch'] !== true
     }
   },
@@ -175,10 +175,13 @@ const schemas = ref([
         }]
       }
     }
+  },
+  {
+    field: 'tree',
+    label: '组织机构树'
   }
 ])
 const newFields = schemas.value.map(item => item.value)
-
 function addForm() {
   schemas.value.forEach((schema, index) => {
     schema['value'] = newFields[index]

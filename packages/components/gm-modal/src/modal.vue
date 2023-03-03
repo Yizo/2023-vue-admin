@@ -135,8 +135,6 @@ const modelProps = computed(()=>{
   return data
 })
 
-console.log(modelProps)
-
 const {loading, loadingIndex, closeLoading, openLoading} = useLoading()
 
 function handleIcnClick(e: PointerEvent) {

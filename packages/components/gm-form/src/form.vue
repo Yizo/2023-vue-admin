@@ -132,12 +132,14 @@ defineExpose({
 })
 
 watch(() => props, (newProps: Record<string, any>) => {
+  console.log('watch:props', newProps)
   initSchemas(newProps)
   _rules.value = newProps.rules
   _schemas.value = newProps.schemas
 }, {deep: true, immediate: true})
 
 watch(() => attrs, (newProps: Record<string, any>) => {
+  console.log('watch:attrs', newProps)
   _attrs.value = newProps
 }, {deep: true, immediate: true})
 

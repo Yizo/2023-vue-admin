@@ -1,6 +1,10 @@
 <template>
   <gm-modal :visible="visible" v-bind="modalProps" ref="modalRef" @cancel="close">
-    <gm-form v-bind="attrs" :schemas="schemas" :rules="rules"  ref="formRef"/>
+    <gm-form v-bind="attrs" :schemas="schemas" :rules="rules"  ref="formRef">
+      <template v-for="name in Object.keys(slots)" #[name]="data">
+        <slot :name="name" v-bind="data"></slot>
+      </template>
+    </gm-form>
   </gm-modal>
 </template>
 
@@ -27,8 +31,6 @@ const props = defineProps({
     default: () => null
   }
 })
-
-console.log(props)
 
 const attrs = useAttrs()
 const slots = useSlots()
