@@ -3,6 +3,7 @@ const modules = import.meta.glob('./**/index.js', { eager: true })
 
 export * from './gm-form'
 export * from './gm-modal'
+export * from './gm-table'
 
 export default {
     install: (app) => {
