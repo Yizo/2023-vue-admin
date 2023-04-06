@@ -3,7 +3,9 @@
   <div>
     <h1>弹窗表单</h1>
     <div>
-      <a-button @click="open">打开表单</a-button>
+      <a-button @click="open">传递组件</a-button>
+      <a-button @click="open2">传递字符串</a-button>
+      <a-button @click="open3">传递函数</a-button>
     </div>
   </div>
 </div>
@@ -29,7 +31,9 @@ const btns = [{
   },
 }]
 
-const { open } = useModal({ title: '弹窗表单', btns, content: formComponent})
+const { open } = useModal({ title: '传递组件', width: '600px', btns, content: formComponent})
+const { open: open2 } = useModal({ title: '传递字符串', width: '400px', btns, content: '123'})
+const { open: open3 } = useModal({ title: '传递函数', width: '400px', btns, content: ()=>'函数'})
 </script>
 
 <style scoped>

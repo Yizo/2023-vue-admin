@@ -1,6 +1,5 @@
 <template>
   <div class="page-main">
-    <h1 class="m-16">动态显示，动态禁用，动态验证</h1>
     <gm-form :label-col="{ style: {width: '80px'} }" layout="horizontal" :schemas="schemas" :rules="rules" ref="formRef">
       <template #search>
         <div class="mt-16">
@@ -20,7 +19,7 @@ export default {
 
 <script lang="ts" setup>
 import {ref, Ref} from 'vue'
-import { FormActionType, RenderCallbackParams } from '@gm/components'
+import { gmForm, FormActionType, RenderCallbackParams } from '@gm/components'
 
 const rules = ref({
   name: [{

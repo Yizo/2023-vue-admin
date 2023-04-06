@@ -21,13 +21,13 @@
     </template>
     <template #closeIcon>
       <div class="close-icon-warp">
-        <a-tooltip title="最大化" :arrowPointAtCenter="true" placement="bottom">
+        <a-tooltip title="最大化" :arrowPointAtCenter="true" placement="top">
           <FullscreenOutlined  v-show="!isFull" class="close-icon ci-1" @click.stop="handleIcnClick"/>
         </a-tooltip>
-        <a-tooltip title="还原" :arrowPointAtCenter="true" placement="bottom">
+        <a-tooltip title="还原" :arrowPointAtCenter="true" placement="top">
           <FullscreenExitOutlined v-show="isFull"  class="close-icon ci-2" @click.stop="handleIcnClick"/>
         </a-tooltip>
-        <a-tooltip title="关闭" :arrowPointAtCenter="true" placement="bottom"  v-if="modelProps.closable">
+        <a-tooltip title="关闭" :arrowPointAtCenter="true" placement="top"  v-if="modelProps.closable">
           <CloseOutlined  class="close-icon ci-3"/>
         </a-tooltip>
       </div>
