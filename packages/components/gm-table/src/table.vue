@@ -5,7 +5,7 @@
         <slot :name="key" v-bind="data"></slot>
       </template>
     </a-table>
-    <div class="mt-16 text-right" >
+    <div class="mt-16 text-right" v-if="!hiddenPagition">
       <a-pagination
           v-bind="pagination"
           :disabled="$attrs.loading"
@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <script lang="ts" setup>
-import {useSlots, useAttrs, defineEmits, reactive, watch } from 'vue'
+import {useSlots, useAttrs, defineEmits, reactive, watch, ref } from 'vue'
 const slots = useSlots()
 const attrs = useAttrs()
 const emits = defineEmits(['reginster', 'page-change', 'show-size-change'])
@@ -41,6 +41,8 @@ const pagination = reactive({
   ...attrs.pagination
 })
 
+const hiddenPagition = ref(false)
+
 const paginationEvent = reactive({
   change: async (current: number, size: number) => {
     emits('page-change', current, size)
@@ -51,7 +53,11 @@ const paginationEvent = reactive({
 })
 
 watch(()=>attrs, (newAttrs)=>{
-  Object.assign(pagination, newAttrs.pagination)
+  if(newAttrs.pagination === false){
+    hiddenPagition.value = true
+  } else {
+    Object.assign(pagination, newAttrs.pagination)
+  }
 }, {
   immediate: true,
   deep: true
