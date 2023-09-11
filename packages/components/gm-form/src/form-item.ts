@@ -144,16 +144,16 @@ function formItem(props: any, content: any){
     if(slot && isFunction(slot)) {
         return createVNode(FormItem, formItemProps, [slot(renderCallbackParams)]
         )
+    } else {
+        return createVNode(FormItem, formItemProps, {
+            default: ()=>(
+                // @ts-ignore
+                createVNode(componentMap[component], {
+                    ...childProps,
+                })
+            )
+        })
     }
-
-    return createVNode(FormItem, formItemProps, {
-        default: ()=>(
-            // @ts-ignore
-            createVNode(componentMap[component], {
-                ...childProps,
-            })
-        )
-    })
 }
 
 formItem.props = {

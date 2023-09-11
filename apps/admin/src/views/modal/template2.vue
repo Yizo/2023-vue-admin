@@ -4,7 +4,7 @@
     <a-button @click="editForm">编辑表单</a-button>
     <gm-modal-form ref="formRef" width="700px" title="表单弹窗" v-model:visible="visible" :rules="rules" :schemas="schemas" :btns="btns">
       <template #tree="{ model }">
-        <a-input type="text" v-model="model['tree']"/>
+        <a-input type="text" v-if="model" v-model="model['tree']"/>
       </template>
     </gm-modal-form>
   </div>

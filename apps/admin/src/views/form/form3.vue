@@ -98,26 +98,38 @@ const schemas = ref([
         },
         options: [{
           label: '南京',
-          value: 'nanjing'
+          value: 'nanjing',
+          onChange: () => {
+            console.log(model)
+          },
         },{
           label: '上海',
           value: 'shanghai',
-          disabled: model['email'] === '126'
+          disabled: model['email'] === '126',
+          onChange: () => {
+            console.log(model)
+          },
         },{
           label: '深圳',
           value: 'shenzhen',
-          disabled: model['email'] === 'qq'
+          disabled: model['email'] === 'qq',
+          onChange: () => {
+            console.log(model)
+          },
         },{
           label: '北京',
           value: 'beijing',
-          disabled: model['email'] === 'gmail'
+          disabled: model['email'] === 'gmail',
+          onChange: () => {
+            console.log(model)
+          },
         },{
           label: '沈阳',
-          value: 'shengyang'
+          value: 'shengyang',
+          onChange: () => {
+            console.log(model)
+          },
         }],
-        onChange: (...args: any[]) => {
-          console.log(args)
-        },
       }
     }
   },
@@ -127,6 +139,9 @@ const schemas = ref([
     value: '18',
     component: 'a-radio-group',
     componentProps: {
+      onChange: () => {
+        console.log('change')
+      },
       options: [{
         label: '18岁',
         value: '18'

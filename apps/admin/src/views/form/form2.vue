@@ -3,7 +3,9 @@
     <h1>使用自定义插槽</h1>
     <gm-form width="120" layout="inline" :schemas="schemas" :rules="rules" ref="formRef">
       <template #name="{ field, model, actions }">
-        <a-input v-if="model" type="text" v-model:value="model['name']" @change="handleChange(actions)"/>
+        <div>
+          <a-input type="text" v-if="model" v-model:value="model['name']" @change="handleChange(actions)"/>
+        </div>
       </template>
     </gm-form>
     <div class="mt-16">

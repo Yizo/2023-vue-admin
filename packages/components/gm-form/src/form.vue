@@ -137,6 +137,11 @@ function initSchemas(props) {
   if(props.schemas) {
     props.schemas.forEach(schema => {
       data[schema.field] = schema.value;
+      if(schema.value == null) {
+        data[schema.field] = ''
+      } else {
+        data[schema.field] = schema.value;
+      }
     })
   }
   formModel.value = {
