@@ -13,6 +13,7 @@ export default {
 
 <script lang="ts" setup>
 import {ref, onMounted, Ref} from 'vue'
+//@ts-ignore
 import { FormActionType } from '@gm/components'
 
 const checkedList = ref(['Apple', 'Orange'])

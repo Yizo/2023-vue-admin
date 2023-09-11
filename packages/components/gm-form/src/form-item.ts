@@ -141,10 +141,8 @@ function formItem(props: any, content: any){
     })
 
     // 存在插槽时，渲染插槽
-    if(isFunction(props.slot)) {
-        return createVNode(FormItem, formItemProps, {
-                default: ()=>slot(renderCallbackParams),
-            }
+    if(slot && isFunction(slot)) {
+        return createVNode(FormItem, formItemProps, [slot(renderCallbackParams)]
         )
     }
 

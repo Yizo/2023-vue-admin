@@ -1,8 +1,9 @@
-import { Input, Select, SelectOption ,SelectOptGroup, Radio, RadioGroup, RadioButton, Switch, Checkbox, CheckboxGroup, DatePicker, RangePicker, Slider } from 'ant-design-vue'
+import { Input, Textarea, Select, SelectOption ,SelectOptGroup, Radio, RadioGroup, RadioButton, Switch, Checkbox, CheckboxGroup, DatePicker, RangePicker, Slider } from 'ant-design-vue'
 
 
 const componentMap = {
     'a-input': Input,
+    'a-textarea': Textarea,
     'a-select': Select,
     'a-select-option': SelectOption,
     'a-select-opt-group': SelectOptGroup,

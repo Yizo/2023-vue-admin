@@ -56,3 +56,9 @@ table {
 	background: rgba(201,205,212, 0.9);
 	-webkit-border-radius: 100px
 }
+
+input:-internal-autofill-previewed,
+input:-internal-autofill-selected {
+	-webkit-text-fill-color: #2a2d33;
+	transition: background-color 5000s ease-out 0.5s;
+}

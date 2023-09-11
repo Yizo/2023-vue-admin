@@ -3,7 +3,7 @@
     <h1>使用自定义插槽</h1>
     <gm-form width="120" layout="inline" :schemas="schemas" :rules="rules" ref="formRef">
       <template #name="{ field, model, actions }">
-        <a-input type="text" v-model:value="model[field]" @change="handleChange(actions)"/>
+        <a-input v-if="model" type="text" v-model:value="model['name']" @change="handleChange(actions)"/>
       </template>
     </gm-form>
     <div class="mt-16">
@@ -34,6 +34,7 @@ const schemas = ref([
   {
     field: 'name',
     label: 'Name',
+    value: '',
     itemProps: {
       width: '120'
     }

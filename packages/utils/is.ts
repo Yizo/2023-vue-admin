@@ -23,7 +23,7 @@ export function isBoolean(val: any): val is Record<any, any> {
 }
 
 export function isPromise(val: any): boolean {
-    return val !== null && is(val, 'Promise')
+    return !!val && is(val.then, 'Function') && is(val.catch, 'Function')
 }
 
 export function isEmpty(val: any): boolean {

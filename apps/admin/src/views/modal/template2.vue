@@ -16,7 +16,8 @@ export default {
 }
 </script>
 <script lang="ts"  setup>
-import { ref, nextTick } from "vue";
+import { ref } from "vue";
+// @ts-ignore
 import type { RenderCallbackParams, FormActionType } from '@gm/components'
 import { useVisible } from '@gm/hook'
 const { visible, open, close } = useVisible()

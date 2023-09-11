@@ -19,7 +19,8 @@ export default {
 
 <script lang="ts" setup>
 import {ref, Ref} from 'vue'
-import { gmForm, FormActionType, RenderCallbackParams } from '@gm/components'
+// @ts-ignore
+import { gmForm, FormActionType, RenderCallbackParams } from "@gm/components"
 
 const rules = ref({
   name: [{

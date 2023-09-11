@@ -15,20 +15,25 @@
       :rules="_rules && _rules[schema.field] ? _rules[schema.field] : []"
   ></item>
   <a-form-item>
-  <a-form-item v-if="attrs.search !== undefined">
-    <a-button @click="formActions.resetFields">
-      <template #icon>
-        <sync-outlined />
-      </template>
-      {{ $attrs.resetText || '重置' }}
-    </a-button>
-    <a-button @click="formActions.validate" class="ml-16" type="primary">
-      <template #icon>
-        <search-outlined />
-      </template>
-      {{ $attrs.submitText || '查询' }}
-    </a-button>
-  </a-form-item>
+    <template v-for="name in Object.keys(slots)">
+      <a-form-item>
+        <slot :name="name" v-bind="{ ...formActions }"></slot>
+      </a-form-item>
+    </template>
+    <a-form-item v-if="attrs.search !== undefined">
+      <a-button @click="formActions.resetFields">
+        <template #icon>
+          <sync-outlined />
+        </template>
+        {{ $attrs.resetText || '重置' }}
+      </a-button>
+      <a-button @click="formActions.validate" class="ml-16" type="primary">
+        <template #icon>
+          <search-outlined />
+        </template>
+        {{ $attrs.submitText || '查询' }}
+      </a-button>
+    </a-form-item>
   </a-form-item>
 </a-form>
 </template>
@@ -163,6 +168,12 @@ watch(() => attrs, (newProps: Record<string, any>) => {
 
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+.ant-form-inline {
+  padding-top: 16px;
+  transform: translateY(-16px);
+  .ant-form-item {
+    margin-bottom: 16px
+  }
+}
 </style>
